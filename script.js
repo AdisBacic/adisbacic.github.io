@@ -134,6 +134,7 @@
       btn.setAttribute('aria-label', ui[next].langAria);
     }
     try { localStorage.setItem('inat.lang', next); } catch (e) {}
+    if (typeof labelTheme === 'function') labelTheme();
     if (onLangChange) onLangChange();
   }
 
@@ -149,10 +150,24 @@
   /* ── Theme ─────────────────────────────────────────────────────────── */
 
   var themeBtn = document.getElementById('theme-toggle');
+
+  // The icon says where you are going, so the label has to agree with it.
+  function labelTheme() {
+    if (!themeBtn) return;
+    var goingLight = root.dataset.theme !== 'light';
+    themeBtn.setAttribute(
+      'aria-label',
+      lang === 'sv'
+        ? goingLight ? 'Byt till ljust tema' : 'Byt till mörkt tema'
+        : goingLight ? 'Switch to light theme' : 'Switch to dark theme'
+    );
+  }
+  labelTheme();
   if (themeBtn) {
     themeBtn.addEventListener('click', function () {
       var next = root.dataset.theme === 'light' ? 'dark' : 'light';
       root.dataset.theme = next;
+      labelTheme();
       try { localStorage.setItem('inat.theme', next); } catch (e) {}
     });
   }

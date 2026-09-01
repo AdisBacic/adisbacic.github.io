@@ -165,8 +165,11 @@ a { color: inherit; }
 }
 .chip:hover { transform: translateY(-2px); background: var(--bg-3); }
 
-.theme-icon { width: 16px; height: 16px; border-radius: 50%; background: var(--gold); box-shadow: inset -5px -3px 0 0 var(--bg-2); }
-:root[data-theme='light'] .theme-icon { box-shadow: none; background: var(--gold); }
+.theme-btn { color: var(--ink); }
+.theme-btn .icon-sun,
+.theme-btn .icon-moon { display: none; }
+:root[data-theme='dark'] .theme-btn .icon-sun { display: block; color: var(--gold); }
+:root[data-theme='light'] .theme-btn .icon-moon { display: block; }
 
 #top-sentinel {
   position: absolute;
@@ -183,7 +186,8 @@ a { color: inherit; }
   position: sticky;
   top: 0;
   z-index: 40;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
   padding: 1.1rem var(--pad);
@@ -219,23 +223,25 @@ a { color: inherit; }
 }
 
 .brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  justify-self: start;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 1.15rem;
-  letter-spacing: -0.02em;
+  font-size: 1.35rem;
+  letter-spacing: -0.045em;
   text-decoration: none;
-  margin-right: auto;
   transition: font-size 0.28s var(--ease);
 }
-.nav.is-scrolled .brand { font-size: 1.02rem; }
-.brand-mark { color: var(--gold); display: grid; place-items: center; transition: transform 0.4s var(--ease); }
-.nav.is-scrolled .brand-mark { transform: rotate(-180deg); }
-.brand-dim { color: var(--ink-dim); font-weight: 500; }
+.nav.is-scrolled .brand { font-size: 1.15rem; }
+/* Mono for the TLD: the word is the brand, the suffix is an address. */
+.brand-dim {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.62em;
+  letter-spacing: 0;
+  color: var(--ink-dim);
+}
 
-.nav-links { display: flex; gap: 1.4rem; }
+.nav-links { display: flex; gap: 1.6rem; justify-self: center; }
 .nav-links a {
   position: relative;
   font-weight: 500;
@@ -262,7 +268,7 @@ a { color: inherit; }
 .nav-links a[aria-current='true']::after { transform: scaleX(1); }
 .nav-links a[aria-current='true'] { color: var(--ink); }
 
-.nav-actions { display: flex; align-items: center; gap: 0.5rem; }
+.nav-actions { display: flex; align-items: center; gap: 0.5rem; justify-self: end; }
 .menu-btn { display: none; }
 .nav-scrim { display: none; }
 
@@ -280,7 +286,7 @@ a { color: inherit; }
 [aria-expanded='true'] .burger i:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
 @media (max-width: 860px) {
-  .nav { padding-block: 0.85rem; }
+  .nav { grid-template-columns: 1fr auto; padding-block: 0.85rem; }
   .nav-cta { display: none; }
   .menu-btn { display: inline-grid; }
 
