@@ -195,17 +195,36 @@ a { color: inherit; }
   background: transparent;
   transition:
     padding 0.28s var(--ease),
-    background 0.28s var(--ease),
     border-color 0.28s var(--ease),
     box-shadow 0.28s var(--ease);
 }
+
+/*
+ * The blur gets a layer of its own and never sits on .nav itself.
+ *
+ * `backdrop-filter` makes an element the containing block for its
+ * position: fixed descendants — and on mobile both the slide-in panel and the
+ * scrim are fixed children of the nav. With the filter on .nav they resolved
+ * against the bar instead of the viewport, so the moment the page was scrolled
+ * the panel collapsed from full height to 120px and the scrim to 61px.
+ */
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(12px) saturate(1.3);
+  transition: opacity 0.28s var(--ease);
+}
+.nav.is-scrolled::before { opacity: 1; }
 
 /* Only becomes a bar once you have left the top: at rest it floats over the
    hero, so the claim gets the full height of the screen. */
 .nav.is-scrolled {
   padding-block: 0.6rem;
-  background: color-mix(in srgb, var(--bg) 86%, transparent);
-  backdrop-filter: blur(12px) saturate(1.3);
   border-bottom-color: var(--line);
   box-shadow: 0 6px 24px -18px rgba(0, 0, 0, 0.6);
 }
