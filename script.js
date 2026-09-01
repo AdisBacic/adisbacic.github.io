@@ -25,7 +25,7 @@
     'nav.cta': 'Hör av dig',
     'hero.kicker': 'Stockholm',
     'hero.build': 'Vi bygger',
-    'hero.buildAll': 'det som faktiskt fungerar, system som skalar, mjukvara byggd för att hålla, det andra kallade omöjligt, och sånt som klarar produktion.',
+    'hero.buildAll': 'Vi bygger med stolthet, säkert, rent, hållbart och tryggt. Vi skapar kvalité, relationer, innovationer och värde.',
     'hero.thesis': 'Inat är bosniska för den sortens envishet som vägrar "tillräckligt nära". Det är därför vi levererar det som fungerar — och håller det fungerande.',
     'hero.ctaPrimary': 'Starta ett samtal',
     'hero.ctaSecondary': 'Vad vi gör',
@@ -40,10 +40,11 @@
     'svc.sub': 'Avgränsat nog att börja nästa vecka, byggt som om det ska rulla i flera år.',
     'svc.c1.title': 'Produktbyggen',
     'svc.c1.body': 'Från idé till något i produktion. Webbappar och installerbara PWA:er som fortsätter fungera offline, talar mer än ett språk, och inte faller ihop första gången nätet gör det.',
-    'svc.c2.title': 'AI som gör riktigt jobb',
-    'svc.c2.body': 'Assistenter och agenter kopplade till era faktiska dokument och data — mätta mot den andra svåra frågan, inte den första enkla demon.',
-    'svc.c3.title': 'Integrationer och plattformar',
-    'svc.c3.body': 'Banker, betalningar, huvudböcker, data. Rörmokeriet ingen ser förrän det går sönder, byggt för dagen det granskas snarare än dagen det demas.',
+    'svc.c2.title': 'AI. Mer än ett buzzword.',
+    'svc.c2.body': 'För bakom buzzwordet finns en teknik som på allvar förändrar vad som går att automatisera, förenkla och förbättra.',
+    'svc.c2.body2': 'Vi hjälper företag att gå från ”vi borde göra något med AI” till lösningar som faktiskt används. Assistenter och agenter kopplade till era dokument, system och data — byggda för riktiga arbetsflöden, inte för nästa imponerande demo.',
+    'svc.c3.title': 'Workflows & Automatisering',
+    'svc.c3.body': 'Våga drömma. Med dagens teknik finns det färre begränsningar än vi är vana vid. Vi hjälper er att tänka om kring hur arbetet faktiskt kan göras & bygger systemen som gör det möjligt.',
     'proj.badge': 'Arbete',
     'proj.title': 'Levererat, och fortfarande i drift',
     'proj.sub': 'Fyra produkter i produktion. Olika domäner, samma ribba.',
@@ -455,58 +456,93 @@
      to learn what is on offer — and the first phrase is in the HTML, so the
      line reads correctly with JavaScript switched off. */
 
-  var PHRASES = {
+  var SEQUENCES = {
     en: [
-      'what actually works',
-      'systems that scale',
-      'software made to last',
-      'what others called impossible',
-      'things that survive production'
+      { lead: 'We build', words: ['with pride', 'securely', 'cleanly', 'sustainably', 'safely'] },
+      { lead: 'We create', words: ['quality', 'relationships', 'innovation', 'value'] }
     ],
     sv: [
-      'det som faktiskt fungerar',
-      'system som skalar',
-      'mjukvara byggd för att hålla',
-      'det andra kallade omöjligt',
-      'sånt som klarar produktion'
+      { lead: 'Vi bygger', words: ['med stolthet', 'säkert', 'rent', 'hållbart', 'tryggt'] },
+      { lead: 'Vi skapar', words: ['kvalité', 'relationer', 'innovationer', 'värde'] }
     ]
   };
 
   var rotEl = document.getElementById('rotator-text');
+  var leadEl = document.getElementById('hero-lead');
   var caretEl = document.querySelector('.caret');
   var rotTimer = null;
+  var leadTimer = null;
+
+  // Deliberately unhurried: the words are the pitch, so they have to be
+  // readable rather than impressive. Typing ~85ms/char with a long hold reads
+  // at about the speed you would say them out loud.
+  var TYPE = 85;
+  var ERASE = 40;
+  var HOLD = 2600;
+  var BETWEEN = 450;
+  var PHASE_GAP = 900;
+
+  function swapLead(text) {
+    if (!leadEl || leadEl.textContent === text) return;
+    clearTimeout(leadTimer);
+    leadEl.classList.add('is-swapping');
+    leadTimer = setTimeout(function () {
+      leadEl.textContent = text;
+      leadEl.classList.remove('is-swapping');
+    }, 260);
+  }
 
   function startRotator() {
     if (!rotEl) return;
     clearTimeout(rotTimer);
-    var list = PHRASES[lang] || PHRASES.en;
+    clearTimeout(leadTimer);
 
-    if (reduced) {
-      // Typing is the whole effect, so there is nothing to degrade to: show one
-      // phrase, drop the caret, and let the sr-only sentence carry the rest.
-      rotEl.textContent = list[0];
-      if (caretEl) caretEl.style.display = 'none';
-      return;
-    }
-
-    var i = 0;
+    var seqs = SEQUENCES[lang] || SEQUENCES.en;
+    var s = 0;
+    var w = 0;
     var ch = 0;
     var deleting = false;
 
+    if (leadEl) {
+      leadEl.classList.remove('is-swapping');
+      leadEl.textContent = seqs[0].lead;
+    }
+
+    if (reduced) {
+      // Typing is the whole effect, so there is nothing to degrade to: one
+      // phrase, no caret, and the sr-only sentence carries the rest.
+      rotEl.textContent = seqs[0].words[0];
+      if (caretEl) caretEl.style.display = 'none';
+      return;
+    }
+    if (caretEl) caretEl.style.display = '';
+
     (function step() {
-      var full = list[i];
+      var words = seqs[s].words;
+      var full = words[w];
+
       ch += deleting ? -1 : 1;
       rotEl.textContent = full.slice(0, Math.max(0, ch));
 
-      var delay = deleting ? 26 : 52;
+      var delay = deleting ? ERASE : TYPE;
+
       if (!deleting && ch >= full.length) {
         deleting = true;
-        delay = 2000;
+        delay = HOLD;
       } else if (deleting && ch <= 0) {
         deleting = false;
-        i = (i + 1) % list.length;
-        delay = 300;
+        w += 1;
+        if (w >= words.length) {
+          // List exhausted — hand over to the next lead word.
+          w = 0;
+          s = (s + 1) % seqs.length;
+          swapLead(seqs[s].lead);
+          delay = PHASE_GAP;
+        } else {
+          delay = BETWEEN;
+        }
       }
+
       rotTimer = setTimeout(step, delay);
     })();
   }

@@ -388,7 +388,7 @@ section[id] { scroll-margin-top: 6rem; }
   right: var(--pad);
   top: 50%;
   width: min(27rem, 40%);
-  transform: translateY(-50%) rotate(-1.4deg);
+  transform: translateY(-50%);
   opacity: 0.55;
   z-index: -1;
   pointer-events: none;
@@ -434,6 +434,12 @@ section[id] { scroll-margin-top: 6rem; }
 /* The line that changes. Reserving min-height stops the page jumping as
    phrases of different lengths cycle through. */
 .rotator-text { white-space: pre-wrap; }
+
+.hero-lead-word {
+  display: inline-block;
+  transition: opacity 0.26s var(--ease), transform 0.26s var(--ease);
+}
+.hero-lead-word.is-swapping { opacity: 0; transform: translateY(-0.18em); }
 
 .caret {
   display: inline-block;
