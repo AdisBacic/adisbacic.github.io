@@ -18,47 +18,53 @@
 
   var sv = {
     'skip': 'Hoppa till innehållet',
-    'nav.projects': 'Projekt',
+    'nav.services': 'Tjänster',
+    'nav.work': 'Arbete',
     'nav.inat': 'Inat',
     'nav.contact': 'Kontakt',
     'nav.cta': 'Hör av dig',
     'hero.kicker': 'Stockholm',
-    'hero.build': 'Jag bygger',
-    'hero.buildAll': 'virkdagböcker som funkar utan täckning, AI-lärare som undervisar från dina egna papper, sajter för estetiska kliniker, och privata aktieklubbar med delad portfölj.',
-    'hero.thesis': 'Skill och inat, som förvandlar visioner till något som finns.',
-    'hero.ctaPrimary': 'Se projekten',
-    'hero.ctaSecondary': 'Hör av dig',
-    'proj.badge': 'Byggt',
-    'proj.title': 'Fyra saker som inte fanns förut',
-    'proj.sub': 'Två är mina, två har jag varit med och byggt. Alla fyra är i drift.',
-    'proj.garn.role': 'Min egen · byggd som present',
-    'proj.garn.body': 'En virkdagbok till min fru. Varje varv hon loggar skrivs till telefonen först, så den fungerar i en tunnel helt utan täckning — molnet är en säkerhetskopia hon trycker på med flit, aldrig något appen väntar in. Svenska, turkiska och bosniska.',
-    'proj.doc.role': 'Bidragit till',
-    'proj.doc.body': 'Svenska, undervisad utifrån dina egna papper. Ladda upp hyreskontraktet eller brevet från skolan och en AI-lärare som heter Maja bygger lektionen av orden du faktiskt behövde den veckan. Taluttal, spaced repetition, CEFR A1–C2 och TISUS-förberedelse.',
-    'proj.clinic.role': 'Byggt sajten',
-    'proj.clinic.body': 'Sajten för en medicinsk estetisk klinik med mottagningar i Västerås och Stockholm, där varje injektion görs av legitimerad personal. En behandlingskatalog som måste vara begriplig för någon som står och funderar på att boka.',
-    'proj.summit.role': 'Min egen · endast inbjudan',
-    'proj.summit.body': 'En privat aktieklubb för ett gäng vänner. Någon pitchar ett case, gänget röstar, och en majoritet som går igenom agerar på det i en delad papperportfölj — sen avgör riktiga marknadspriser vem som hade rätt. Länken kräver inbjudan, så räkna med en stängd dörr.',
-    'proj.closing': 'Inget av det här fanns förrän någon vägrade släppa idén. Det är hela sidans argument: kan du beskriva det tydligt går det att bygga — och det svåra var aldrig idén.',
-    'inat.badge': 'Varför domänen',
-    'inat.title': 'Det finns inget rent svenskt ord för det',
+    'hero.build': 'Vi bygger',
+    'hero.buildAll': 'det som faktiskt fungerar, system som skalar, mjukvara byggd för att hålla, det andra kallade omöjligt, och sånt som klarar produktion.',
+    'hero.thesis': 'Inat är bosniska för den sortens envishet som vägrar "tillräckligt nära". Det är därför vi levererar det som fungerar — och håller det fungerande.',
+    'hero.ctaPrimary': 'Starta ett samtal',
+    'hero.ctaSecondary': 'Vad vi gör',
     'entry.pos': 'substantiv',
     'entry.lang': 'bosniska',
     'entry.def1': 'Envishet med ryggrad. Att göra saken just för att någon sagt att den inte går.',
     'entry.def2': 'Vägran att acceptera "tillräckligt nära" som svar.',
     'entry.usageTag': 'i bruk',
     'entry.usage': '"Han byggde upp det igen, sten för sten, iz inata."',
+    'svc.badge': 'Vad vi gör',
+    'svc.title': 'Tre sätt vi är användbara',
+    'svc.sub': 'Avgränsat nog att börja nästa vecka, byggt som om det ska rulla i flera år.',
+    'svc.c1.title': 'Produktbyggen',
+    'svc.c1.body': 'Från idé till något i produktion. Webbappar och installerbara PWA:er som fortsätter fungera offline, talar mer än ett språk, och inte faller ihop första gången nätet gör det.',
+    'svc.c2.title': 'AI som gör riktigt jobb',
+    'svc.c2.body': 'Assistenter och agenter kopplade till era faktiska dokument och data — mätta mot den andra svåra frågan, inte den första enkla demon.',
+    'svc.c3.title': 'Integrationer och plattformar',
+    'svc.c3.body': 'Banker, betalningar, huvudböcker, data. Rörmokeriet ingen ser förrän det går sönder, byggt för dagen det granskas snarare än dagen det demas.',
+    'proj.badge': 'Arbete',
+    'proj.title': 'Levererat, och fortfarande i drift',
+    'proj.sub': 'Fyra produkter i produktion. Olika domäner, samma ribba.',
+    'proj.garn.body': 'En virkdagbok. Varje varv skrivs till telefonen först, så den fungerar i en tunnel helt utan täckning — molnet är en säkerhetskopia man trycker på med flit, aldrig något appen väntar in. Svenska, turkiska och bosniska.',
+    'proj.doc.body': 'Svenska, undervisad utifrån dina egna papper. Ladda upp hyreskontraktet eller brevet från skolan och en AI-lärare som heter Maja bygger lektionen av orden du faktiskt behövde den veckan. Taluttal, spaced repetition, CEFR A1–C2 och TISUS-förberedelse.',
+    'proj.clinic.body': 'Sajten för en medicinsk estetisk klinik med mottagningar i Västerås och Stockholm, där varje injektion görs av legitimerad personal. En behandlingskatalog som måste vara begriplig för någon som står och funderar på att boka.',
+    'proj.summit.body': 'En privat aktieklubb för ett gäng vänner. Någon pitchar ett case, gänget röstar, och en majoritet som går igenom agerar på det i en delad papperportfölj — sen avgör riktiga marknadspriser vem som hade rätt. Länken kräver inbjudan, så räkna med en stängd dörr.',
+    'proj.closing': 'Inget av det här fanns förrän någon vägrade släppa idén. Kan du beskriva det tydligt går det att bygga — det svåra var aldrig idén.',
+    'inat.badge': 'Varför domänen',
+    'inat.title': 'Det finns inget rent svenskt ord för det',
     'inat.p1': '"Envishet" är nära. "Trots" låter barnsligt. "Principfasthet" är för stelt. Inat är det som får någon att bygga upp ett hus sten för sten hellre än att låta det rivas — inte för att det är praktiskt, utan för att det är deras.',
-    'inat.p2': 'Varje projekt här ovan började som en mening någon sa i förbigående. Inat är det som bär en idé förbi punkten där den slutar vara kul: fjärde omskrivningen, buggen som bara händer på någon annans telefon, veckan då ingenting fungerar. Skill avgör vad du kan bygga. Inat avgör vad som faktiskt blir färdigt.',
-    'inat.day': 'Till vardags jobbar jag med finansiell mjukvara — bokföring, fintech och open banking.',
-    'inat.switch': 'Envishet',
+    'inat.p2': 'Varje projekt här ovan började som en mening någon sa i förbigående. Inat är det som bär en idé förbi punkten där den slutar vara kul: fjärde omskrivningen, buggen som bara händer på någon annans telefon, veckan då ingenting fungerar. Skill avgör vad som går att bygga. Inat avgör vad som faktiskt blir färdigt.',
+    'inat.day': 'Till vardags: finansiell mjukvara — bokföring, fintech och open banking.',
     'inat.pr1': 'Idéer är billiga. Färdigt är ovanligt.',
     'inat.pr2': 'Inga tysta fel.',
     'inat.pr3': 'Behöver det täckning för att funka, funkar det inte.',
     'inat.pr4': 'Fjärde omskrivningen är där det blir bra.',
+    'inat.switch': 'Envishet',
     'contact.badge': 'Kontakt',
-    'contact.title': 'Säg hej',
-    'contact.sub': 'Jobb, frilans, eller en vision du vill se byggd. Formuläret öppnar din egen mejlklient — ingenting skickas via den här sidan, och det finns ingen spårning på den.',
+    'contact.title': 'Berätta vad ni vill ha byggt',
+    'contact.sub': 'Ett projekt, en råskiss, eller en andra åsikt. Formuläret öppnar din egen mejlklient — ingenting skickas via den här sidan, och det finns ingen spårning på den.',
     'contact.copy': 'Kopiera',
     'contact.name': 'Ditt namn',
     'contact.email': 'Din mejl',
@@ -151,20 +157,116 @@
     });
   }
 
+  /* ── Nav: scroll state, progress and current section ───────────────── */
+
+  var nav = document.querySelector('.nav');
+  var progress = document.getElementById('nav-progress');
+  var sectionLinks = Array.prototype.slice.call(
+    document.querySelectorAll('.nav-links a[href^="#"]')
+  );
+  var sections = sectionLinks
+    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+
+  /*
+   * Observers rather than scroll listeners.
+   *
+   * A scroll handler is the obvious way to do this and the fragile one: gate it
+   * behind requestAnimationFrame and a backgrounded tab deadlocks the flag
+   * permanently. IntersectionObserver fires from the compositor, needs no
+   * throttling, and cannot get wedged. The progress bar genuinely needs scroll
+   * position, so that one keeps a listener — and it is written so that failing
+   * to fire costs a progress bar, not the whole nav.
+   */
+
+  var sentinel = document.getElementById('top-sentinel');
+  if (nav && sentinel && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      nav.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+    }).observe(sentinel);
+  }
+
+  if (sections.length && 'IntersectionObserver' in window) {
+    var visible = new Set();
+    var spy = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) visible.add(e.target.id);
+          else visible.delete(e.target.id);
+        });
+        // Furthest down the page wins, so a tall section does not lose to the
+        // sliver of the next one poking into view.
+        var active = null;
+        sections.forEach(function (el) { if (visible.has(el.id)) active = el.id; });
+        sectionLinks.forEach(function (a) {
+          if (active && a.getAttribute('href') === '#' + active) a.setAttribute('aria-current', 'true');
+          else a.removeAttribute('aria-current');
+        });
+      },
+      { rootMargin: '-28% 0px -58% 0px' }
+    );
+    sections.forEach(function (el) { spy.observe(el); });
+  }
+
+  if (progress) {
+    var paintProgress = function () {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var y = window.scrollY || document.documentElement.scrollTop || 0;
+      progress.style.width = (max > 0 ? Math.min(1, Math.max(0, y / max)) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', paintProgress, { passive: true });
+    window.addEventListener('resize', paintProgress);
+    paintProgress();
+  }
+
   /* ── Mobile menu ───────────────────────────────────────────────────── */
 
   var menuBtn = document.getElementById('menu-btn');
   var navLinks = document.getElementById('nav-links');
+  var scrim = document.getElementById('nav-scrim');
+  var lastFocus = null;
+
+  function setMenu(open) {
+    if (!menuBtn || !navLinks) return;
+    navLinks.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('menu-open', open);
+
+    if (scrim) {
+      if (open) {
+        scrim.hidden = false;
+        // Next frame, so the opacity transition has a start value to run from.
+        requestAnimationFrame(function () { scrim.classList.add('show'); });
+      } else {
+        scrim.classList.remove('show');
+        setTimeout(function () { if (!navLinks.classList.contains('open')) scrim.hidden = true; }, 300);
+      }
+    }
+
+    if (open) {
+      lastFocus = document.activeElement;
+      var first = navLinks.querySelector('a');
+      if (first) first.focus();
+    } else if (lastFocus) {
+      lastFocus.focus();
+      lastFocus = null;
+    }
+  }
+
   if (menuBtn && navLinks) {
     menuBtn.addEventListener('click', function () {
-      var open = navLinks.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', String(open));
+      setMenu(!navLinks.classList.contains('open'));
     });
     navLinks.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') {
-        navLinks.classList.remove('open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      }
+      if (e.target.tagName === 'A') setMenu(false);
+    });
+    if (scrim) scrim.addEventListener('click', function () { setMenu(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) setMenu(false);
+    });
+    // A panel left open while the layout grows back to desktop would trap scroll.
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 860 && navLinks.classList.contains('open')) setMenu(false);
     });
   }
 
@@ -340,18 +442,18 @@
 
   var PHRASES = {
     en: [
-      'crochet diaries that work with no signal',
-      'AI teachers that teach from your own paperwork',
-      'sites for aesthetic clinics',
-      'private stock clubs with a shared portfolio',
-      'the thing somebody said could not be done'
+      'what actually works',
+      'systems that scale',
+      'software made to last',
+      'what others called impossible',
+      'things that survive production'
     ],
     sv: [
-      'virkdagböcker som funkar utan täckning',
-      'AI-lärare som undervisar från dina egna papper',
-      'sajter för estetiska kliniker',
-      'privata aktieklubbar med delad portfölj',
-      'det någon sa inte gick att göra'
+      'det som faktiskt fungerar',
+      'system som skalar',
+      'mjukvara byggd för att hålla',
+      'det andra kallade omöjligt',
+      'sånt som klarar produktion'
     ]
   };
 

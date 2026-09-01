@@ -168,6 +168,15 @@ a { color: inherit; }
 .theme-icon { width: 16px; height: 16px; border-radius: 50%; background: var(--gold); box-shadow: inset -5px -3px 0 0 var(--bg-2); }
 :root[data-theme='light'] .theme-icon { box-shadow: none; background: var(--gold); }
 
+#top-sentinel {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
 /* ── Nav ─────────────────────────────────────────────────────────────── */
 
 .nav {
@@ -177,10 +186,36 @@ a { color: inherit; }
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.85rem var(--pad);
-  border-bottom: 2px solid var(--line);
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(10px);
+  padding: 1.1rem var(--pad);
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  transition:
+    padding 0.28s var(--ease),
+    background 0.28s var(--ease),
+    border-color 0.28s var(--ease),
+    box-shadow 0.28s var(--ease);
+}
+
+/* Only becomes a bar once you have left the top: at rest it floats over the
+   hero, so the claim gets the full height of the screen. */
+.nav.is-scrolled {
+  padding-block: 0.6rem;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(12px) saturate(1.3);
+  border-bottom-color: var(--line);
+  box-shadow: 0 6px 24px -18px rgba(0, 0, 0, 0.6);
+}
+
+/* Reading progress, drawn on the nav's own bottom edge. */
+.nav-progress {
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg, var(--gold), var(--blue));
+  transition: width 0.12s linear;
+  pointer-events: none;
 }
 
 .brand {
@@ -193,40 +228,102 @@ a { color: inherit; }
   letter-spacing: -0.02em;
   text-decoration: none;
   margin-right: auto;
+  transition: font-size 0.28s var(--ease);
 }
-.brand-mark { color: var(--gold); display: grid; place-items: center; }
+.nav.is-scrolled .brand { font-size: 1.02rem; }
+.brand-mark { color: var(--gold); display: grid; place-items: center; transition: transform 0.4s var(--ease); }
+.nav.is-scrolled .brand-mark { transform: rotate(-180deg); }
 .brand-dim { color: var(--ink-dim); font-weight: 500; }
 
 .nav-links { display: flex; gap: 1.4rem; }
 .nav-links a {
+  position: relative;
   font-weight: 500;
   font-size: 0.95rem;
   text-decoration: none;
   color: var(--ink-dim);
   padding: 0.35rem 0;
-  border-bottom: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color 0.15s;
 }
-.nav-links a:hover { color: var(--ink); border-bottom-color: var(--gold); }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s var(--ease);
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover::after,
+.nav-links a[aria-current='true']::after { transform: scaleX(1); }
+.nav-links a[aria-current='true'] { color: var(--ink); }
 
 .nav-actions { display: flex; align-items: center; gap: 0.5rem; }
 .menu-btn { display: none; }
+.nav-scrim { display: none; }
+
+/* Animated burger → close. */
+.burger { display: grid; gap: 4px; width: 18px; }
+.burger i {
+  display: block;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.26s var(--ease), opacity 0.2s var(--ease);
+}
+[aria-expanded='true'] .burger i:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+[aria-expanded='true'] .burger i:nth-child(2) { opacity: 0; }
+[aria-expanded='true'] .burger i:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
 @media (max-width: 860px) {
+  .nav { padding-block: 0.85rem; }
   .nav-cta { display: none; }
   .menu-btn { display: inline-grid; }
+
+  /* A real panel rather than a dropdown: full height, slides in from the right,
+     and the page behind it is dimmed and locked. */
   .nav-links {
-    position: absolute;
-    inset: 100% 0 auto 0;
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(19rem, 82vw);
     flex-direction: column;
+    align-content: start;
     gap: 0;
-    padding: 0.5rem var(--pad) 1rem;
-    background: var(--bg);
-    border-bottom: 2px solid var(--line);
-    display: none;
+    padding: 5.5rem 1.5rem 2rem;
+    background: var(--bg-2);
+    border-left: 2px solid var(--line);
+    box-shadow: -20px 0 50px -30px rgba(0, 0, 0, 0.7);
+    transform: translateX(101%);
+    transition: transform 0.32s var(--ease);
+    z-index: 45;
   }
-  .nav-links.open { display: flex; }
-  .nav-links a { padding: 0.8rem 0; border-bottom: 1px solid var(--line); }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links a {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px dashed var(--line);
+    color: var(--ink);
+  }
+  .nav-links a::after { display: none; }
+
+  .nav-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 44;
+    background: rgba(4, 8, 20, 0.5);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity 0.28s var(--ease);
+  }
+  .nav-scrim.show { opacity: 1; }
+  body.menu-open { overflow: hidden; }
 }
 
 /* ── Layout ──────────────────────────────────────────────────────────── */
@@ -272,70 +369,43 @@ section[id] { scroll-margin-top: 6rem; }
   padding: clamp(3.5rem, 10vw, 7rem) var(--pad) clamp(3rem, 7vw, 5rem);
   display: grid;
   align-items: center;
-  min-height: min(68svh, 560px);
+  min-height: min(62svh, 520px);
+  align-content: center;
   isolation: isolate;
 }
 
-/* The dictionary entry, demoted to scenery. Decorative only — the readable
-   version lives in the Inat section, which is why this can be this faint. */
-.hero-bg {
+/* The entry, recessed behind the claim: faded enough to read as backdrop,
+   not so faded you cannot read it. Below 1040px there is no column to hide in,
+   so it rejoins the flow at full strength rather than disappearing. */
+.entry.hero-entry {
   position: absolute;
-  inset: 0;
+  right: var(--pad);
+  top: 50%;
+  width: min(27rem, 40%);
+  transform: translateY(-50%) rotate(-1.4deg);
+  opacity: 0.55;
   z-index: -1;
-  overflow: hidden;
   pointer-events: none;
-  display: grid;
-  align-content: center;
-  /* Parked hard right and bled off the edge: anchored left it ran straight
-     through the name and the buttons, which read as a mistake rather than as
-     scenery. */
-  justify-items: end;
-  text-align: right;
+  box-shadow: none;
+  filter: saturate(0.6);
 }
 
-.ghost-word {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(10rem, 26vw, 24rem);
-  line-height: 0.74;
-  letter-spacing: -0.07em;
-  transform: translate(9%, 4%);
-  color: transparent;
-  -webkit-text-stroke: 2px color-mix(in srgb, var(--ink) 9%, transparent);
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--gold) 13%, transparent),
-    transparent 72%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  user-select: none;
+@media (max-width: 1040px) {
+  .entry.hero-entry {
+    position: static;
+    width: 100%;
+    max-width: 34rem;
+    transform: none;
+    opacity: 1;
+    z-index: auto;
+    pointer-events: auto;
+    box-shadow: var(--shadow);
+    filter: none;
+    margin-top: clamp(2rem, 6vw, 3rem);
+  }
 }
 
-.ghost-line {
-  width: min(60%, 26rem);
-  height: 0;
-  margin-top: 0.9rem;
-  border-top: 2px dashed color-mix(in srgb, var(--ink) 12%, transparent);
-}
-
-.ghost-gloss {
-  margin-top: 0.5rem;
-  margin-right: 0.6rem;
-  font-family: var(--font-mono);
-  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
-  letter-spacing: 0.06em;
-  color: color-mix(in srgb, var(--ink) 20%, transparent);
-  user-select: none;
-}
-
-/* On a phone there is no column to keep it out of, so it goes away entirely
-   rather than sitting behind the text. */
-@media (max-width: 820px) {
-  .hero-bg { display: none; }
-}
-
-.hero-inner { max-width: 44rem; }
+.hero-inner { max-width: 46rem; }
 
 .kicker {
   font-family: var(--font-mono);
@@ -346,30 +416,23 @@ section[id] { scroll-margin-top: 6rem; }
   margin-bottom: 0.6rem;
 }
 
-.hero-name {
-  font-size: clamp(2.4rem, 7vw, 4.2rem);
-  margin-bottom: 0.9rem;
+.hero-claim {
+  font-size: clamp(2.3rem, 6.4vw, 4.4rem);
+  line-height: 1.02;
+  margin-bottom: 1.1rem;
+  /* Two lines reserved so a longer phrase cycling in does not shove the page. */
+  min-height: 2.05em;
 }
+.hero-claim .rotator { color: var(--gold); }
 
 /* The line that changes. Reserving min-height stops the page jumping as
    phrases of different lengths cycle through. */
-.hero-build {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.15rem, 2.6vw, 1.75rem);
-  line-height: 1.35;
-  color: var(--ink);
-  min-height: 2.7em;
-  margin-bottom: 0.9rem;
-}
-
-.rotator { color: var(--gold); }
 .rotator-text { white-space: pre-wrap; }
 
 .caret {
   display: inline-block;
-  width: 2px;
-  height: 1em;
+  width: 0.06em;
+  height: 0.82em;
   margin-left: 2px;
   vertical-align: -0.14em;
   background: var(--gold);
@@ -556,7 +619,34 @@ section[id] { scroll-margin-top: 6rem; }
 
 .badge-invert { background: var(--bg); }
 
-.principles { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+.section-tight { padding-block: clamp(2.5rem, 6vw, 4rem); }
+.inat-narrow { max-width: var(--maxw); margin-inline: auto; }
+.inat-narrow .section-title { font-size: clamp(1.6rem, 3.4vw, 2.4rem); max-width: 24ch; }
+
+/* Kept, but demoted: this is the story behind the name, not the pitch. */
+.inat-note {
+  max-width: 46rem;
+  margin: 1rem 0 1.5rem;
+  display: grid;
+  gap: 0.7rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink-dim);
+}
+.inat-day {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-dim);
+  opacity: 0.7;
+}
+
+.principles-row {
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin-bottom: 1.5rem;
+}
+.principles-row li { font-size: 0.9rem; padding: 0.7rem 0.9rem; }
+
+.principles { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
 .principles li {
   padding: 0.9rem 1.1rem;
   border: 2px solid var(--line);
