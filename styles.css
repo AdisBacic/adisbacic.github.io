@@ -396,7 +396,13 @@ section[id] { scroll-margin-top: 6rem; }
   filter: saturate(0.6);
 }
 
-@media (max-width: 1040px) {
+/* Hidden outright on phones: it is context, not the message, and the Inat
+   section explains the word in prose anyway. */
+@media (max-width: 899px) {
+  .entry.hero-entry { display: none; }
+}
+
+@media (min-width: 900px) and (max-width: 1040px) {
   .entry.hero-entry {
     position: static;
     width: 100%;
@@ -413,6 +419,13 @@ section[id] { scroll-margin-top: 6rem; }
 
 .hero-inner { max-width: 46rem; }
 
+/* Above the breakpoint the entry is an absolutely positioned backdrop on the
+   right, so the text column has to be told to stop before it — otherwise long
+   rotation phrases run straight across the card. */
+@media (min-width: 1041px) {
+  .hero-inner { max-width: min(46rem, calc(100% - 31rem)); }
+}
+
 .kicker {
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -423,13 +436,21 @@ section[id] { scroll-margin-top: 6rem; }
 }
 
 .hero-claim {
-  font-size: clamp(2.3rem, 6.4vw, 4.4rem);
-  line-height: 1.02;
+  font-size: clamp(2.1rem, 5.6vw, 4rem);
+  line-height: 1.04;
   margin-bottom: 1.1rem;
-  /* Two lines reserved so a longer phrase cycling in does not shove the page. */
-  min-height: 2.05em;
 }
-.hero-claim .rotator { color: var(--gold); }
+
+/* Lead and rotation are separate rows, so the gold line always starts at the
+   same x no matter how long the word before it is. Three rows are reserved
+   (one lead + up to two wrapped rotation lines) so a long phrase cycling in
+   cannot shove the rest of the page down. */
+.hero-lead-word,
+.hero-claim .rotator { display: block; }
+.hero-claim .rotator {
+  color: var(--gold);
+  min-height: 2.08em;
+}
 
 /* The line that changes. Reserving min-height stops the page jumping as
    phrases of different lengths cycle through. */
@@ -567,6 +588,17 @@ section[id] { scroll-margin-top: 6rem; }
 
 .card h3 { font-size: 1.3rem; margin: 0.9rem 0 0.6rem; }
 .card p { color: var(--ink-dim); font-size: 0.97rem; }
+
+/* Services stay on mobile — they are the offer — but compact enough not to
+   turn the page into three screens of prose. */
+@media (max-width: 720px) {
+  #services .cards { gap: 0.75rem; }
+  #services .card { padding: 1.1rem 1.15rem; }
+  #services .card h3 { font-size: 1.08rem; margin: 0.5rem 0 0.4rem; }
+  #services .card p { font-size: 0.9rem; line-height: 1.55; }
+  #services .card::before { height: 4px; }
+  #services .section-head { margin-bottom: 1.25rem; }
+}
 
 .card-num {
   font-family: var(--font-mono);
