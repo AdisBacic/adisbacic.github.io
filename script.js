@@ -18,57 +18,54 @@
 
   var sv = {
     'skip': 'Hoppa till innehållet',
-    'nav.work': 'Arbete',
-    'nav.inat': 'Inat',
     'nav.projects': 'Projekt',
+    'nav.inat': 'Inat',
     'nav.contact': 'Kontakt',
     'nav.cta': 'Hör av dig',
+    'hero.kicker': 'Stockholm',
+    'hero.build': 'Jag bygger',
+    'hero.buildAll': 'virkdagböcker som funkar utan täckning, AI-lärare som undervisar från dina egna papper, sajter för estetiska kliniker, och privata aktieklubbar med delad portfölj.',
+    'hero.thesis': 'Skill och inat, som förvandlar visioner till något som finns.',
+    'hero.ctaPrimary': 'Se projekten',
+    'hero.ctaSecondary': 'Hör av dig',
+    'proj.badge': 'Byggt',
+    'proj.title': 'Fyra saker som inte fanns förut',
+    'proj.sub': 'Två är mina, två har jag varit med och byggt. Alla fyra är i drift.',
+    'proj.garn.role': 'Min egen · byggd som present',
+    'proj.garn.body': 'En virkdagbok till min fru. Varje varv hon loggar skrivs till telefonen först, så den fungerar i en tunnel helt utan täckning — molnet är en säkerhetskopia hon trycker på med flit, aldrig något appen väntar in. Svenska, turkiska och bosniska.',
+    'proj.doc.role': 'Bidragit till',
+    'proj.doc.body': 'Svenska, undervisad utifrån dina egna papper. Ladda upp hyreskontraktet eller brevet från skolan och en AI-lärare som heter Maja bygger lektionen av orden du faktiskt behövde den veckan. Taluttal, spaced repetition, CEFR A1–C2 och TISUS-förberedelse.',
+    'proj.clinic.role': 'Byggt sajten',
+    'proj.clinic.body': 'Sajten för en medicinsk estetisk klinik med mottagningar i Västerås och Stockholm, där varje injektion görs av legitimerad personal. En behandlingskatalog som måste vara begriplig för någon som står och funderar på att boka.',
+    'proj.summit.role': 'Min egen · endast inbjudan',
+    'proj.summit.body': 'En privat aktieklubb för ett gäng vänner. Någon pitchar ett case, gänget röstar, och en majoritet som går igenom agerar på det i en delad papperportfölj — sen avgör riktiga marknadspriser vem som hade rätt. Länken kräver inbjudan, så räkna med en stängd dörr.',
+    'proj.closing': 'Inget av det här fanns förrän någon vägrade släppa idén. Det är hela sidans argument: kan du beskriva det tydligt går det att bygga — och det svåra var aldrig idén.',
+    'inat.badge': 'Varför domänen',
+    'inat.title': 'Det finns inget rent svenskt ord för det',
     'entry.pos': 'substantiv',
     'entry.lang': 'bosniska',
     'entry.def1': 'Envishet med ryggrad. Att göra saken just för att någon sagt att den inte går.',
     'entry.def2': 'Vägran att acceptera "tillräckligt nära" som svar.',
     'entry.usageTag': 'i bruk',
     'entry.usage': '"Han byggde upp det igen, sten för sten, iz inata."',
-    'hero.kicker': 'Stockholm, Sverige',
-    'hero.lead': 'Jag bygger mjukvaran som flyttar pengar och håller böckerna raka.',
-    'hero.tag1': 'Bokföring',
-    'hero.tag2': 'Fintech',
-    'hero.tag3': 'Open banking',
-    'hero.ctaPrimary': 'Hör av dig',
-    'hero.ctaSecondary': 'Vad jag jobbar med',
-    'work.badge': 'Vad jag jobbar med',
-    'work.title': 'Pengar, och sanningen om dem',
-    'work.sub': 'Tre områden som straffar svepande formuleringar på exakt samma sätt.',
-    'work.c1.title': 'Bokföring',
-    'work.c1.body': 'Dubbel bokföring är obeveklig, och det är hela poängen. Huvudbok, avstämning, moms och verifikationskedjor som håller när någon faktiskt granskar dem.',
-    'work.c2.title': 'Fintech',
-    'work.c2.body': 'Betalningar, risk och regelefterlevnad — delarna där "det brukar funka" inte är godkänt, och där specialfallet är produkten.',
-    'work.c3.title': 'Open banking',
-    'work.c3.body': 'PSD2, AIS och PIS. Bankkopplingar som sköter sig, och rörig kontodata förvandlad till något man faktiskt kan resonera om.',
-    'inat.badge': 'Varför domänen',
-    'inat.title': 'Det finns inget rent svenskt ord för det',
     'inat.p1': '"Envishet" är nära. "Trots" låter barnsligt. "Principfasthet" är för stelt. Inat är det som får någon att bygga upp ett hus sten för sten hellre än att låta det rivas — inte för att det är praktiskt, utan för att det är deras.',
-    'inat.p2': 'I finansiell mjukvara visar det sig vara en användbar egenskap. Det är det som får dig att jaga det enda öret som inte stämmer 23:40. Det är att vägra släppa en bankintegration som funkar för det mesta. Huvudböcker gör inte "ungefär".',
+    'inat.p2': 'Varje projekt här ovan började som en mening någon sa i förbigående. Inat är det som bär en idé förbi punkten där den slutar vara kul: fjärde omskrivningen, buggen som bara händer på någon annans telefon, veckan då ingenting fungerar. Skill avgör vad du kan bygga. Inat avgör vad som faktiskt blir färdigt.',
+    'inat.day': 'Till vardags jobbar jag med finansiell mjukvara — bokföring, fintech och open banking.',
     'inat.switch': 'Envishet',
-    'inat.pr1': 'Inga tysta fel.',
-    'inat.pr2': 'Stämmer det inte av är det inte klart.',
-    'inat.pr3': 'Tråkig infrastruktur, intressanta produkter.',
-    'inat.pr4': 'Skriv ner det, annars hände det inte.',
-    'proj.badge': 'Sånt jag byggt',
-    'proj.title': 'Utvalt arbete',
-    'proj.p1.body': 'En lokal-först virkdagbok, byggd som present. Allt skrivs till IndexedDB först så den fungerar helt utan täckning; molnet är en uttalad säkerhetskopia, aldrig ett beroende. FastAPI på Cloud Run, Firestore, tre språk.',
-    'proj.p2.title': 'Den här sidan',
-    'proj.p2.body': 'Handskriven HTML, CSS och JavaScript. Inget ramverk, inget byggsteg, ingen spårning. Den laddar på en tur och retur och funkar fortfarande om tio år.',
+    'inat.pr1': 'Idéer är billiga. Färdigt är ovanligt.',
+    'inat.pr2': 'Inga tysta fel.',
+    'inat.pr3': 'Behöver det täckning för att funka, funkar det inte.',
+    'inat.pr4': 'Fjärde omskrivningen är där det blir bra.',
     'contact.badge': 'Kontakt',
     'contact.title': 'Säg hej',
-    'contact.sub': 'Jobb, frilans, eller bara för att bråka om bokföringsprogram. Formuläret öppnar din egen mejlklient — ingenting skickas via den här sidan, och det finns ingen spårning på den.',
+    'contact.sub': 'Jobb, frilans, eller en vision du vill se byggd. Formuläret öppnar din egen mejlklient — ingenting skickas via den här sidan, och det finns ingen spårning på den.',
     'contact.copy': 'Kopiera',
     'contact.name': 'Ditt namn',
     'contact.email': 'Din mejl',
     'contact.topic': 'Vad gäller det?',
     'contact.topic1': 'Jobb',
     'contact.topic2': 'Frilans',
-    'contact.topic3': 'Bara hälsa',
+    'contact.topic3': 'En idé',
     'contact.message': 'Meddelande',
     'contact.send': 'Öppna i mejl',
     'footer.built': 'byggd av inat i Stockholm'
@@ -115,6 +112,8 @@
 
   function t(key) { return ui[lang][key]; }
 
+  var onLangChange = null;
+
   function applyLang(next) {
     lang = next;
     root.lang = next;
@@ -129,6 +128,7 @@
       btn.setAttribute('aria-label', ui[next].langAria);
     }
     try { localStorage.setItem('inat.lang', next); } catch (e) {}
+    if (onLangChange) onLangChange();
   }
 
   applyLang(lang);
@@ -331,6 +331,71 @@
       window.location.href = href;
     });
   }
+
+  /* ── The line that changes ─────────────────────────────────────────
+     Phrases are the actual projects, not slogans. The full list also sits in
+     the markup as screen-reader-only text, so nobody has to watch an animation
+     to learn what is on offer — and the first phrase is in the HTML, so the
+     line reads correctly with JavaScript switched off. */
+
+  var PHRASES = {
+    en: [
+      'crochet diaries that work with no signal',
+      'AI teachers that teach from your own paperwork',
+      'sites for aesthetic clinics',
+      'private stock clubs with a shared portfolio',
+      'the thing somebody said could not be done'
+    ],
+    sv: [
+      'virkdagböcker som funkar utan täckning',
+      'AI-lärare som undervisar från dina egna papper',
+      'sajter för estetiska kliniker',
+      'privata aktieklubbar med delad portfölj',
+      'det någon sa inte gick att göra'
+    ]
+  };
+
+  var rotEl = document.getElementById('rotator-text');
+  var caretEl = document.querySelector('.caret');
+  var rotTimer = null;
+
+  function startRotator() {
+    if (!rotEl) return;
+    clearTimeout(rotTimer);
+    var list = PHRASES[lang] || PHRASES.en;
+
+    if (reduced) {
+      // Typing is the whole effect, so there is nothing to degrade to: show one
+      // phrase, drop the caret, and let the sr-only sentence carry the rest.
+      rotEl.textContent = list[0];
+      if (caretEl) caretEl.style.display = 'none';
+      return;
+    }
+
+    var i = 0;
+    var ch = 0;
+    var deleting = false;
+
+    (function step() {
+      var full = list[i];
+      ch += deleting ? -1 : 1;
+      rotEl.textContent = full.slice(0, Math.max(0, ch));
+
+      var delay = deleting ? 26 : 52;
+      if (!deleting && ch >= full.length) {
+        deleting = true;
+        delay = 2000;
+      } else if (deleting && ch <= 0) {
+        deleting = false;
+        i = (i + 1) % list.length;
+        delay = 300;
+      }
+      rotTimer = setTimeout(step, delay);
+    })();
+  }
+
+  onLangChange = startRotator;
+  startRotator();
 
   /* ── Easter egg: type "inat" ───────────────────────────────────────── */
 

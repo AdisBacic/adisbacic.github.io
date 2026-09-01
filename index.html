@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-    <title>Adis Bacic — Bookkeeping, fintech &amp; open banking in Stockholm</title>
+    <title>Adis Bacic — software from Stockholm, built out of inat</title>
     <meta
       name="description"
-      content="Adis Bacic builds financial software in Stockholm — bookkeeping systems, fintech and open banking. Inat: stubbornness with a purpose."
+      content="Adis Bacic builds software in Stockholm — a local-first crochet diary, an AI Swedish teacher, a clinic site, a private stock club. Skill and inat, turning visions into things that exist."
     />
     <link rel="canonical" href="https://inat.dev/" />
 
@@ -16,7 +16,7 @@
     <meta property="og:title" content="Adis Bacic — inat.dev" />
     <meta
       property="og:description"
-      content="Bookkeeping, fintech and open banking, built in Stockholm. Inat: stubbornness with a purpose."
+      content="Projects built out of inat, from Stockholm. Skill and stubbornness, turning visions into things that exist."
     />
     <meta property="og:image" content="https://inat.dev/og.png" />
     <meta property="og:image:width" content="1200" />
@@ -54,7 +54,7 @@
         "name": "Adis Bacic",
         "url": "https://inat.dev",
         "email": "mailto:adis@inat.dev",
-        "jobTitle": "Software engineer — bookkeeping, fintech, open banking",
+        "jobTitle": "Software engineer",
         "address": { "@type": "PostalAddress", "addressLocality": "Stockholm", "addressCountry": "SE" }
       }
     </script>
@@ -73,9 +73,8 @@
       </a>
 
       <nav class="nav-links" id="nav-links" aria-label="Main">
-        <a href="#work" data-i18n="nav.work">Work</a>
-        <a href="#inat" data-i18n="nav.inat">Inat</a>
         <a href="#projects" data-i18n="nav.projects">Projects</a>
+        <a href="#inat" data-i18n="nav.inat">Inat</a>
         <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
 
@@ -92,90 +91,128 @@
     </header>
 
     <main id="main">
-      <!-- ── Hero: the dictionary entry ─────────────────────────────── -->
+      <!-- ── Hero ───────────────────────────────────────────────────── -->
       <section class="hero">
-        <div class="hero-inner">
-          <article class="entry reveal">
-            <div class="entry-top">
-              <h1 class="entry-word">inat</h1>
-              <button class="say" id="say" type="button" aria-label="Pronunciation">
-                <span class="ipa">/ǐnaːt/</span>
-              </button>
-            </div>
-            <p class="entry-meta"><em data-i18n="entry.pos">noun</em> · <span data-i18n="entry.lang">Bosnian</span></p>
-            <hr class="entry-rule" />
-            <ol class="entry-defs">
-              <li data-i18n="entry.def1">
-                Stubbornness with a spine. Doing the thing precisely because you were told it
-                could not be done.
-              </li>
-              <li data-i18n="entry.def2">
-                The refusal to accept "close enough" as an answer.
-              </li>
-            </ol>
-            <p class="entry-usage">
-              <span class="usage-tag" data-i18n="entry.usageTag">in use</span>
-              <span data-i18n="entry.usage">"He rebuilt it brick by brick, iz inata."</span>
-            </p>
-          </article>
+        <!-- The dictionary entry became the backdrop. Purely decorative here, so
+             it is hidden from assistive tech; the readable entry lives in the
+             Inat section below, at a contrast you can actually read. -->
+        <div class="hero-bg" aria-hidden="true">
+          <span class="ghost-word">inat</span>
+          <span class="ghost-gloss">/ǐnaːt/ · noun · Bosnian</span>
+        </div>
 
-          <div class="hero-side reveal">
-            <p class="kicker" data-i18n="hero.kicker">Stockholm, Sweden</p>
-            <h2 class="hero-name">Adis Bacic</h2>
-            <p class="hero-lead" data-i18n="hero.lead">
-              I build the software that moves money and keeps the books straight.
-            </p>
-            <ul class="tags">
-              <li data-i18n="hero.tag1">Bookkeeping</li>
-              <li data-i18n="hero.tag2">Fintech</li>
-              <li data-i18n="hero.tag3">Open banking</li>
-            </ul>
-            <div class="hero-cta">
-              <a class="btn btn-primary" href="#contact" data-i18n="hero.ctaPrimary">Get in touch</a>
-              <a class="btn btn-ghost" href="#work" data-i18n="hero.ctaSecondary">What I work with</a>
-            </div>
+        <div class="hero-inner reveal">
+          <p class="kicker" data-i18n="hero.kicker">Stockholm</p>
+          <h1 class="hero-name">Adis Bacic</h1>
+
+          <p class="hero-build">
+            <span data-i18n="hero.build">I build</span>
+            <span class="sr-only" data-i18n="hero.buildAll">
+              crochet diaries that work with no signal, AI teachers that teach from
+              your own paperwork, sites for aesthetic clinics, and private stock
+              clubs with a shared portfolio.
+            </span>
+            <span class="rotator" aria-hidden="true"
+              ><span class="rotator-text" id="rotator-text">crochet diaries that work with no signal</span
+              ><span class="caret"></span
+            ></span>
+          </p>
+
+          <p class="hero-thesis" data-i18n="hero.thesis">
+            Skill and inat, turning visions into things that exist.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#projects" data-i18n="hero.ctaPrimary">See the projects</a>
+            <a class="btn btn-ghost" href="#contact" data-i18n="hero.ctaSecondary">Get in touch</a>
           </div>
         </div>
       </section>
 
-      <!-- ── What I work with ───────────────────────────────────────── -->
-      <section id="work" class="section">
+      <!-- ── Projects ───────────────────────────────────────────────── -->
+      <section id="projects" class="section">
         <header class="section-head reveal">
-          <p class="badge" data-i18n="work.badge">What I work with</p>
-          <h2 class="section-title" data-i18n="work.title">Money, and the truth about it</h2>
-          <p class="section-sub" data-i18n="work.sub">
-            Three domains that all punish hand-waving in the same way.
+          <p class="badge" data-i18n="proj.badge">Built</p>
+          <h2 class="section-title" data-i18n="proj.title">Four things that did not exist before</h2>
+          <p class="section-sub" data-i18n="proj.sub">
+            Two are mine, two I helped build. Every one of them is running today.
           </p>
         </header>
 
-        <div class="cards">
-          <article class="card card-blue reveal">
-            <span class="card-num" aria-hidden="true">01</span>
-            <h3 data-i18n="work.c1.title">Bookkeeping</h3>
-            <p data-i18n="work.c1.body">
-              Double-entry is unforgiving, and that is the entire point. Ledgers, reconciliation,
-              VAT and audit trails that still hold up when somebody actually audits them.
+        <div class="cards cards-2">
+          <a class="card card-link card-gold reveal" href="https://garnballer.inat.dev" target="_blank" rel="noopener">
+            <div class="card-head">
+              <h3>Garnballer</h3>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+            <p class="role" data-i18n="proj.garn.role">Mine · built as a gift</p>
+            <p data-i18n="proj.garn.body">
+              A crochet diary for my wife. Every row she logs is written to the phone
+              first, so it works in a tunnel with no signal at all — the cloud is a
+              backup she presses on purpose, never something the app waits for.
+              Swedish, Turkish and Bosnian.
             </p>
-          </article>
+            <ul class="stack">
+              <li>React 19</li><li>TypeScript</li><li>Dexie</li><li>FastAPI</li><li>Firestore</li><li>Cloud Run</li>
+            </ul>
+          </a>
 
-          <article class="card card-gold reveal">
-            <span class="card-num" aria-hidden="true">02</span>
-            <h3 data-i18n="work.c2.title">Fintech</h3>
-            <p data-i18n="work.c2.body">
-              Payments, risk and compliance — the parts of a product where "it usually works" is
-              not a passing grade, and where the edge case is the product.
+          <a class="card card-link card-teal reveal" href="https://doclinguo.com" target="_blank" rel="noopener">
+            <div class="card-head">
+              <h3>DocLinguo</h3>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+            <p class="role" data-i18n="proj.doc.role">Contributed</p>
+            <p data-i18n="proj.doc.body">
+              Swedish, taught from your own paperwork. Upload the rental contract or
+              the letter from school and an AI teacher called Maja builds the lesson
+              out of the words you actually needed that week. Speech practice, spaced
+              repetition, CEFR A1–C2 and TISUS prep.
             </p>
-          </article>
+            <ul class="stack">
+              <li>Google ADK</li><li>AI agents</li><li>Speech</li><li>Spaced repetition</li>
+            </ul>
+          </a>
 
-          <article class="card card-teal reveal">
-            <span class="card-num" aria-hidden="true">03</span>
-            <h3 data-i18n="work.c3.title">Open banking</h3>
-            <p data-i18n="work.c3.body">
-              PSD2, AIS and PIS. Bank connections that behave themselves, and messy account data
-              turned into something you can actually reason about.
+          <a class="card card-link card-blue reveal" href="https://idealclinic.se" target="_blank" rel="noopener">
+            <div class="card-head">
+              <h3>Ideal Clinic</h3>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+            <p class="role" data-i18n="proj.clinic.role">Built the site</p>
+            <p data-i18n="proj.clinic.body">
+              The site for a medical aesthetic clinic with practices in Västerås and
+              Stockholm, where every injectable is done by licensed staff. A treatment
+              catalogue that has to read clearly to someone deciding whether to book.
             </p>
-          </article>
+            <ul class="stack">
+              <li>HTML</li><li>CSS</li><li>JS</li>
+            </ul>
+          </a>
+
+          <a class="card card-link reveal" href="https://summit.elyfe.dev" target="_blank" rel="noopener">
+            <div class="card-head">
+              <h3>Summit</h3>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+            <p class="role" data-i18n="proj.summit.role">Mine · invite only</p>
+            <p data-i18n="proj.summit.body">
+              A private stock club for one group of friends. Someone pitches a case,
+              the crew votes, and a passing majority acts on it in a shared paper
+              portfolio — then real market prices settle who was right. The link asks
+              for an invite, so expect a closed door.
+            </p>
+            <ul class="stack">
+              <li>Python</li><li>PWA</li><li>Paper trading</li>
+            </ul>
+          </a>
         </div>
+
+        <p class="closing reveal" data-i18n="proj.closing">
+          None of these existed until somebody refused to let the idea go. That is the
+          whole argument of this page: if you can describe it clearly, it can be built —
+          and the hard part was never the idea.
+        </p>
       </section>
 
       <!-- ── The inat section ───────────────────────────────────────── -->
@@ -184,25 +221,47 @@
           <div class="reveal">
             <p class="badge badge-invert" data-i18n="inat.badge">Why the domain</p>
             <h2 class="section-title" data-i18n="inat.title">There is no clean English word for it</h2>
+
+            <article class="entry entry-inline">
+              <div class="entry-top">
+                <h3 class="entry-word">inat</h3>
+                <button class="say" id="say" type="button" aria-label="Pronunciation">
+                  <span class="ipa">/ǐnaːt/</span>
+                </button>
+              </div>
+              <p class="entry-meta"><em data-i18n="entry.pos">noun</em> · <span data-i18n="entry.lang">Bosnian</span></p>
+              <hr class="entry-rule" />
+              <ol class="entry-defs">
+                <li data-i18n="entry.def1">
+                  Stubbornness with a spine. Doing the thing precisely because you were
+                  told it could not be done.
+                </li>
+                <li data-i18n="entry.def2">The refusal to accept "close enough" as an answer.</li>
+              </ol>
+              <p class="entry-usage">
+                <span class="usage-tag" data-i18n="entry.usageTag">in use</span>
+                <span data-i18n="entry.usage">"He rebuilt it brick by brick, iz inata."</span>
+              </p>
+            </article>
+
             <p class="prose" data-i18n="inat.p1">
-              "Stubbornness" is close. "Spite" is too mean. "Defiance" is too grand. Inat is what
-              makes somebody rebuild a house brick by brick rather than let it be torn down — not
-              because it is practical, but because it is theirs.
+              "Stubbornness" is close. "Spite" is too mean. "Defiance" is too grand. Inat
+              is what makes somebody rebuild a house brick by brick rather than let it be
+              torn down — not because it is practical, but because it is theirs.
             </p>
             <p class="prose" data-i18n="inat.p2">
-              In financial software it turns out to be a useful trait. It is what makes you chase
-              the one öre that will not reconcile at 23:40. It is refusing to ship a bank
-              integration that works most of the time. Ledgers do not do "roughly".
+              Every project above started as a sentence somebody said in passing. Inat is
+              what carries an idea past the point where it stops being fun: the fourth
+              rewrite, the bug that only happens on someone else's phone, the week where
+              nothing works. Skill decides what you can build. Inat decides what actually
+              gets finished.
+            </p>
+            <p class="aside" data-i18n="inat.day">
+              Day to day I work on financial software — bookkeeping, fintech and open banking.
             </p>
 
             <div class="switch-row">
-              <button
-                class="switch is-on"
-                id="inat-switch"
-                type="button"
-                role="switch"
-                aria-checked="true"
-              >
+              <button class="switch is-on" id="inat-switch" type="button" role="switch" aria-checked="true">
                 <span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span>
                 <span class="switch-label" data-i18n="inat.switch">Stubbornness</span>
               </button>
@@ -211,49 +270,11 @@
           </div>
 
           <ul class="principles reveal">
-            <li data-i18n="inat.pr1">No silent failures.</li>
-            <li data-i18n="inat.pr2">If it does not reconcile, it is not done.</li>
-            <li data-i18n="inat.pr3">Boring infrastructure, interesting products.</li>
-            <li data-i18n="inat.pr4">Write it down, or it did not happen.</li>
+            <li data-i18n="inat.pr1">Ideas are cheap. Finished is rare.</li>
+            <li data-i18n="inat.pr2">No silent failures.</li>
+            <li data-i18n="inat.pr3">If it needs signal to work, it does not work.</li>
+            <li data-i18n="inat.pr4">The fourth rewrite is where it gets good.</li>
           </ul>
-        </div>
-      </section>
-
-      <!-- ── Projects ───────────────────────────────────────────────── -->
-      <section id="projects" class="section">
-        <header class="section-head reveal">
-          <p class="badge" data-i18n="proj.badge">Things I have built</p>
-          <h2 class="section-title" data-i18n="proj.title">Selected work</h2>
-        </header>
-
-        <div class="cards cards-2">
-          <a class="card card-link reveal" href="https://garnballer.inat.dev" target="_blank" rel="noopener">
-            <div class="card-head">
-              <h3>Garnballer</h3>
-              <span class="arrow" aria-hidden="true">↗</span>
-            </div>
-            <p data-i18n="proj.p1.body">
-              A local-first crochet diary, built as a gift. Everything is written to IndexedDB
-              first so it works with no signal at all; the cloud is an explicit backup, never a
-              dependency. FastAPI on Cloud Run, Firestore, three languages.
-            </p>
-            <ul class="stack">
-              <li>React</li><li>TypeScript</li><li>Dexie</li><li>FastAPI</li><li>GCP</li>
-            </ul>
-          </a>
-
-          <article class="card reveal">
-            <div class="card-head">
-              <h3 data-i18n="proj.p2.title">This page</h3>
-            </div>
-            <p data-i18n="proj.p2.body">
-              Hand-written HTML, CSS and JavaScript. No framework, no build step, no tracking.
-              It loads in one round trip and will still work in ten years.
-            </p>
-            <ul class="stack">
-              <li>HTML</li><li>CSS</li><li>JS</li><li>GitHub Pages</li>
-            </ul>
-          </article>
         </div>
       </section>
 

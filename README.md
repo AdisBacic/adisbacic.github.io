@@ -1,6 +1,8 @@
 # inat.dev
 
-Personal site for **Adis Bacic** — bookkeeping, fintech and open banking, from Stockholm.
+Personal site for **Adis Bacic** — Stockholm. Built around four shipped projects:
+[Garnballer](https://garnballer.inat.dev), [DocLinguo](https://doclinguo.com),
+[Ideal Clinic](https://idealclinic.se) and [Summit](https://summit.elyfe.dev) (invite only).
 
 Live at **https://inat.dev**.
 
@@ -17,7 +19,7 @@ dependencies, no tracking. Served by GitHub Pages.
 ```
 index.html      markup + English copy
 styles.css      design tokens, dark/light themes
-script.js       i18n (EN/SV), theme, form → mailto, the stubborn switch
+script.js       i18n (EN/SV), theme, typewriter, form → mailto, the stubborn switch
 og.png          generated, see tools/
 tools/          zero-dependency PNG generator for the social card
 CNAME           inat.dev
