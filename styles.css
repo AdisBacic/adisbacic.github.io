@@ -318,6 +318,17 @@ a { color: inherit; }
   }
   .nav-links a::after { display: none; }
 
+  /* The nav has to outrank both the scrim and the panel, or the close button
+     ends up underneath them and the menu can only be dismissed by tapping
+     around it. */
+  .nav { z-index: 46; }
+
+  /* The panel is a positioned child of the nav, so inside the nav's own
+     stacking context it paints over anything static — the burger included.
+     Giving the action cluster a layer of its own keeps the close button on top
+     while the menu is open. */
+  .nav-actions { position: relative; z-index: 47; }
+
   .nav-scrim {
     display: block;
     position: fixed;
@@ -326,9 +337,15 @@ a { color: inherit; }
     background: rgba(4, 8, 20, 0.5);
     backdrop-filter: blur(2px);
     opacity: 0;
+    /* Load-bearing. An element at opacity 0 still takes every tap, and this
+       class selector overrides the `hidden` attribute the script sets — so
+       without it the scrim sits invisibly over the whole page on mobile and
+       swallows all input, the menu button included. */
+    pointer-events: none;
     transition: opacity 0.28s var(--ease);
   }
-  .nav-scrim.show { opacity: 1; }
+  .nav-scrim.show { opacity: 1; pointer-events: auto; }
+  .nav-scrim[hidden] { display: none; }
   body.menu-open { overflow: hidden; }
 }
 
@@ -449,7 +466,10 @@ section[id] { scroll-margin-top: 6rem; }
 .hero-claim .rotator { display: block; }
 .hero-claim .rotator {
   color: var(--gold);
-  min-height: 2.08em;
+  /* One line is enough for every phrase in the rotation — the widest, "for the
+     long term", measures 467px against 544px available. Reserving two, as the
+     longer phrases once needed, left a permanent empty row under the claim. */
+  min-height: 1.14em;
 }
 
 /* The line that changes. Reserving min-height stops the page jumping as

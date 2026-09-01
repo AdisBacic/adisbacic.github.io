@@ -25,7 +25,7 @@
     'nav.cta': 'Hör av dig',
     'hero.kicker': 'Stockholm',
     'hero.build': 'Vi bygger',
-    'hero.buildAll': 'Vi bygger med stolthet, säkert, rent, hållbart och tryggt. Vi skapar kvalité, relationer, innovationer och värde.',
+    'hero.buildAll': 'Vi bygger skalbart, säkert, långsiktigt, transparent och metodiskt. Vi skapar värde, kvalitet, förtroende och försprång.',
     'hero.thesis': 'Inat betyder envishet som vägrar "tillräckligt nära". Det är därför vi levererar det som fungerar och håller det fungerande.',
     'hero.ctaPrimary': 'Starta ett samtal',
     'hero.ctaSecondary': 'Vad vi gör',
@@ -250,8 +250,10 @@
     if (scrim) {
       if (open) {
         scrim.hidden = false;
-        // Next frame, so the opacity transition has a start value to run from.
-        requestAnimationFrame(function () { scrim.classList.add('show'); });
+        // A tick later, so the opacity transition has a start value to run from.
+        // Deliberately a timeout rather than requestAnimationFrame: a frame that
+        // never arrives would leave the scrim stuck transparent.
+        setTimeout(function () { scrim.classList.add('show'); }, 10);
       } else {
         scrim.classList.remove('show');
         setTimeout(function () { if (!navLinks.classList.contains('open')) scrim.hidden = true; }, 300);
@@ -455,14 +457,24 @@
      to learn what is on offer — and the first phrase is in the HTML, so the
      line reads correctly with JavaScript switched off. */
 
+  /*
+   * First list is how the work is done, second is what the client is left with.
+   * Adverbs then nouns, deliberately: the method earns the outcome.
+   */
   var SEQUENCES = {
     en: [
-      { lead: 'We build', words: ['with pride', 'securely', 'cleanly', 'sustainably', 'safely'] },
-      { lead: 'We create', words: ['quality', 'relationships', 'innovation', 'value'] }
+      {
+        lead: 'We build',
+        words: ['to scale', 'securely', 'for the long term', 'transparently', 'methodically']
+      },
+      { lead: 'We create', words: ['value', 'quality', 'trust', 'an edge'] }
     ],
     sv: [
-      { lead: 'Vi bygger', words: ['med stolthet', 'säkert', 'rent', 'hållbart', 'tryggt'] },
-      { lead: 'Vi skapar', words: ['kvalité', 'relationer', 'innovationer', 'värde'] }
+      {
+        lead: 'Vi bygger',
+        words: ['skalbart', 'säkert', 'långsiktigt', 'transparent', 'metodiskt']
+      },
+      { lead: 'Vi skapar', words: ['värde', 'kvalitet', 'förtroende', 'försprång'] }
     ]
   };
 
