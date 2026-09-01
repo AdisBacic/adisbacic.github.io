@@ -42,6 +42,31 @@ node tools/generate-og.mjs
 
 ## DNS
 
-Apex and `www` point at GitHub Pages from Cloudflare, **DNS only** (grey cloud)
-so GitHub can issue and renew its own certificate. The Zoho mail records on the
-apex (MX, SPF, DKIM, DMARC) are untouched by any of this.
+DNS lives in Cloudflare. Apex and `www` point at GitHub Pages:
+
+| Type | Name | Content | Proxy |
+| :--- | :--- | :--- | :--- |
+| A | `inat.dev` | `185.199.108.153` … `.111.153` (4 records) | **DNS only** |
+| AAAA | `inat.dev` | `2606:50c0:8000::153` … `8003::153` (4 records) | **DNS only** |
+| CNAME | `www` | `adisbacic.github.io` | **DNS only** |
+
+**Keep these grey-clouded.** Proxying them through Cloudflare stops GitHub from
+completing its own ACME challenge, so the certificate silently fails to renew —
+the site keeps working until it expires, then stops. Cloudflare's dashboard will
+nag that "Proxying is required for most security and performance features";
+ignore it.
+
+`.dev` is on the HSTS preload list, so browsers will only ever try HTTPS here.
+There is no HTTP fallback to limp along on if the certificate lapses.
+
+The Zoho mail records on the apex (3× MX, SPF, DKIM at `zoho._domainkey`, DMARC
+at `_dmarc`, and the `zoho-verification` TXT) are untouched by any of this, and
+were verified intact with `dig` afterwards. `garnballer.inat.dev` is a separate
+CNAME to Firebase Hosting and is likewise unaffected.
+
+## Why a site on the apex at all
+
+Two reasons. Cloudflare was flagging that neither `inat.dev` nor `www.inat.dev`
+resolved to anything, and a sending domain with no website behind it is a weak
+signal to spam filters — which matters because mail from this domain goes
+through Zoho and its deliverability score is the thing being defended.
