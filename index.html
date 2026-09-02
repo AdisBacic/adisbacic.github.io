@@ -37,6 +37,9 @@
     <script>
       // Set the theme before first paint so the page never flashes the wrong one.
       (function () {
+        // The word used to live at /#inat on this page. Old links still point
+        // there, so they are handed on to its own page.
+        if (location.hash === '#inat') location.replace('/inat/');
         try {
           var saved = localStorage.getItem('inat.theme');
           var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
@@ -73,7 +76,7 @@
       <nav class="nav-links" id="nav-links" aria-label="Main">
         <a href="#services" data-i18n="nav.services">Services</a>
         <a href="#work" data-i18n="nav.work">Work</a>
-        <a href="#inat" data-i18n="nav.inat">Inat</a>
+        <a href="/inat/" data-i18n="nav.inat">Inat</a>
         <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
 
@@ -109,10 +112,16 @@
               We build to scale, securely, for the long term, transparently and
               methodically. We create value, quality, trust and an edge.
             </span>
-            <span class="rotator" aria-hidden="true"
-              ><span class="rotator-text" id="rotator-text">to scale</span
-              ><span class="caret"></span
-            ></span>
+            <!-- Two copies of the phrase share one grid cell: the hidden sizer
+                 holds the whole of it so the row is already the finished width,
+                 and the live text types into that width from the left. -->
+            <span class="rotator" aria-hidden="true">
+              <span class="rotator-sizer" id="rotator-sizer">to scale</span>
+              <span class="rotator-live"
+                ><span class="rotator-text" id="rotator-text">to scale</span
+                ><span class="caret"></span
+              ></span>
+            </span>
           </h1>
 
           <p class="hero-thesis" data-i18n="hero.thesis">
@@ -126,16 +135,13 @@
           </div>
         </div>
 
-        <!-- The entry sits behind the claim as a recessed card: faded enough to
-             read as backdrop, not so faded you cannot read it. On narrow screens
-             there is no room beside the text, so it drops into the flow at full
-             strength instead of hiding. -->
-        <article class="entry hero-entry">
+        <!-- The entry as a print on the background: below the call to action
+             and off to the right, faded. Decorative here — the readable version,
+             with the pronunciation button, lives on /inat/. -->
+        <article class="entry hero-entry" aria-hidden="true">
           <div class="entry-top">
             <p class="entry-word">inat</p>
-            <button class="say" id="say" type="button" aria-label="Pronunciation">
-              <span class="ipa">/ǐnaːt/</span>
-            </button>
+            <span class="say"><span class="ipa">/ǐnaːt/</span></span>
           </div>
           <p class="entry-meta"><em data-i18n="entry.pos">noun</em> · <span data-i18n="entry.lang">Bosnian</span></p>
           <hr class="entry-rule" />
@@ -277,67 +283,13 @@
         </p>
       </section>
 
-      <!-- ── Inat: small on purpose, but the switch stays ───────────── -->
-      <section id="inat" class="section section-dark section-tight">
-        <div class="inat-narrow">
-          <p class="badge badge-invert" data-i18n="inat.badge">Why the domain</p>
-          <h2 class="section-title reveal" data-i18n="inat.title">
-            There is no clean English word for it
-          </h2>
-
-          <div class="inat-note reveal">
-            <p data-i18n="inat.p1">
-              "Stubbornness" is close. "Spite" is too mean. "Defiance" is too grand.
-              Inat is what makes somebody rebuild a house brick by brick rather than
-              let it be torn down — not because it is practical, but because it is
-              theirs.
-            </p>
-            <p data-i18n="inat.p2">
-              Every project above started as a sentence somebody said in passing. Inat
-              is what carries an idea past the point where it stops being fun: the
-              fourth rewrite, the bug that only happens on someone else's phone, the
-              week where nothing works. Skill decides what can be built. Inat decides
-              what actually gets finished.
-            </p>
-            <p class="inat-day" data-i18n="inat.day">
-              Day to day: financial software — bookkeeping, fintech and open banking.
-            </p>
-          </div>
-
-          <ul class="principles principles-row reveal">
-            <li data-i18n="inat.pr1">Ideas are cheap. Finished is rare.</li>
-            <li data-i18n="inat.pr2">No silent failures.</li>
-            <li data-i18n="inat.pr3">If it needs signal to work, it does not work.</li>
-            <li data-i18n="inat.pr4">The fourth rewrite is where it gets good.</li>
-          </ul>
-
-          <div class="switch-row reveal">
-            <button class="switch is-on" id="inat-switch" type="button" role="switch" aria-checked="true">
-              <span class="switch-track" aria-hidden="true"><span class="switch-knob"></span></span>
-              <span class="switch-label" data-i18n="inat.switch">Stubbornness</span>
-            </button>
-            <p class="switch-say" id="switch-say" role="status" aria-live="polite"></p>
-          </div>
-        </div>
-      </section>
-
       <!-- ── Contact ────────────────────────────────────────────────── -->
       <section id="contact" class="section">
         <div class="contact-grid">
           <div class="reveal">
             <p class="badge" data-i18n="contact.badge">Contact</p>
             <h2 class="section-title" data-i18n="contact.title">Tell us what you want built</h2>
-            <p class="prose" data-i18n="contact.sub">
-              A project, a rough idea, or a second opinion. The form opens your own mail
-              client — nothing is sent through this page, and there is no tracking on it.
-            </p>
-
-            <div class="mail-direct">
-              <span class="mono" id="mail-text">adis@inat.dev</span>
-              <button class="btn btn-ghost btn-sm" id="copy-mail" type="button" data-i18n="contact.copy">
-                Copy
-              </button>
-            </div>
+            <p class="prose" data-i18n="contact.sub">A project, a rough idea, or a second opinion.</p>
           </div>
 
           <form class="form reveal" id="contact-form" novalidate>

@@ -17,7 +17,8 @@ Hand-written HTML, CSS and JavaScript. No framework, no build step, no
 dependencies, no tracking. Served by GitHub Pages.
 
 ```
-index.html      markup + English copy
+index.html      landing: markup + English copy
+inat/index.html the word's own page: the entry, the story, the stubborn switch
 styles.css      design tokens, dark/light themes
 script.js       i18n (EN/SV), theme, typewriter, form → mailto, the stubborn switch
 og.png          generated, see tools/

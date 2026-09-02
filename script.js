@@ -55,17 +55,18 @@
     'inat.badge': 'Varför domänen',
     'inat.title': 'Det finns inget rent svenskt ord för det',
     'inat.p1': '"Envishet" är nära. "Trots" låter barnsligt. "Principfasthet" är för stelt. Inat är det som får någon att bygga upp ett hus sten för sten hellre än att låta det rivas — inte för att det är praktiskt, utan för att det är deras.',
-    'inat.p2': 'Varje projekt här ovan började som en mening någon sa i förbigående. Inat är det som bär en idé förbi punkten där den slutar vara kul: fjärde omskrivningen, buggen som bara händer på någon annans telefon, veckan då ingenting fungerar. Skill avgör vad som går att bygga. Inat avgör vad som faktiskt blir färdigt.',
+    'inat.p2': 'Varje projekt på förstasidan började som en mening någon sa i förbigående. Inat är det som bär en idé förbi punkten där den slutar vara kul: fjärde omskrivningen, buggen som bara händer på någon annans telefon, veckan då ingenting fungerar. Skill avgör vad som går att bygga. Inat avgör vad som faktiskt blir färdigt.',
     'inat.day': 'Till vardags: finansiell mjukvara — bokföring, fintech och open banking.',
     'inat.pr1': 'Idéer är billiga. Färdigt är ovanligt.',
     'inat.pr2': 'Inga tysta fel.',
     'inat.pr3': 'Behöver det täckning för att funka, funkar det inte.',
     'inat.pr4': 'Fjärde omskrivningen är där det blir bra.',
     'inat.switch': 'Envishet',
+    'inat.tryOff': 'Varsågod, försök stänga av den.',
+    'inat.ctaWork': 'Se arbetet',
     'contact.badge': 'Kontakt',
     'contact.title': 'Berätta vad ni vill ha byggt',
-    'contact.sub': 'Ett projekt, en råskiss, eller en andra åsikt. Formuläret öppnar din egen mejlklient — ingenting skickas via den här sidan, och det finns ingen spårning på den.',
-    'contact.copy': 'Kopiera',
+    'contact.sub': 'Ett projekt, en råskiss eller en andra åsikt.',
     'contact.name': 'Ditt namn',
     'contact.email': 'Din mejl',
     'contact.topic': 'Vad gäller det?',
@@ -84,8 +85,6 @@
       errMessage: 'A message would help.',
       formOk: 'Opening your mail client…',
       formLong: 'That is a long message — I trimmed it for the mail client. Send the full version straight to ' + MAIL + '.',
-      copyOk: 'Copied ' + MAIL,
-      copyFail: 'Could not copy — select it manually.',
       refuse1: 'No.',
       refuse2: 'Still no.',
       giveIn: '…fine.',
@@ -99,8 +98,6 @@
       errMessage: 'Ett meddelande hade hjälpt.',
       formOk: 'Öppnar din mejlklient…',
       formLong: 'Det där var ett långt meddelande — jag kortade det för mejlklienten. Skicka hela versionen direkt till ' + MAIL + '.',
-      copyOk: 'Kopierade ' + MAIL,
-      copyFail: 'Kunde inte kopiera — markera den manuellt.',
       refuse1: 'Nej.',
       refuse2: 'Fortfarande nej.',
       giveIn: '…okej då.',
@@ -379,22 +376,6 @@
     });
   }
 
-  /* ── Copy the address ──────────────────────────────────────────────── */
-
-  var copyBtn = document.getElementById('copy-mail');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', function () {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(MAIL).then(
-          function () { toast(t('copyOk')); },
-          function () { toast(t('copyFail')); }
-        );
-      } else {
-        toast(t('copyFail'));
-      }
-    });
-  }
-
   /* ── Contact form → mailto ─────────────────────────────────────────── */
 
   var form = document.getElementById('contact-form');
@@ -479,6 +460,7 @@
   };
 
   var rotEl = document.getElementById('rotator-text');
+  var sizerEl = document.getElementById('rotator-sizer');
   var leadEl = document.getElementById('hero-lead');
   var caretEl = document.querySelector('.caret');
   var rotTimer = null;
@@ -523,6 +505,7 @@
       // Typing is the whole effect, so there is nothing to degrade to: one
       // phrase, no caret, and the sr-only sentence carries the rest.
       rotEl.textContent = seqs[0].words[0];
+      if (sizerEl) sizerEl.textContent = seqs[0].words[0];
       if (caretEl) caretEl.style.display = 'none';
       return;
     }
@@ -533,6 +516,10 @@
       var full = words[w];
 
       ch += deleting ? -1 : 1;
+      // A phrase is starting: hand the invisible sizer the whole of it, so the
+      // row already has its finished width before the first letter lands and
+      // the centred line does not shuffle as it types.
+      if (!deleting && ch === 1 && sizerEl) sizerEl.textContent = full;
       rotEl.textContent = full.slice(0, Math.max(0, ch));
 
       var delay = deleting ? ERASE : TYPE;

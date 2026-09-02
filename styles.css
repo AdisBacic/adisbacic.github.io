@@ -144,7 +144,6 @@ a { color: inherit; }
   border-color: var(--line-strong);
 }
 .btn-ghost { background: transparent; }
-.btn-sm { min-height: 38px; padding: 0.4rem 0.85rem; font-size: 0.85rem; }
 .btn-block { width: 100%; }
 
 .chip {
@@ -284,8 +283,8 @@ a { color: inherit; }
 }
 .nav-links a:hover { color: var(--ink); }
 .nav-links a:hover::after,
-.nav-links a[aria-current='true']::after { transform: scaleX(1); }
-.nav-links a[aria-current='true'] { color: var(--ink); }
+.nav-links a[aria-current]::after { transform: scaleX(1); }
+.nav-links a[aria-current] { color: var(--ink); }
 
 .nav-actions { display: flex; align-items: center; gap: 0.5rem; justify-self: end; }
 .menu-btn { display: none; }
@@ -404,62 +403,60 @@ section[id] { scroll-margin-top: 6rem; }
 
 /* ── Hero ────────────────────────────────────────────────────────────── */
 
+/* One centred column. The claim and the call to action are the whole point of
+   the first screen, so nothing sits beside them any more — the dictionary
+   entry follows underneath as a faded print, not as a neighbour. */
 .hero {
   position: relative;
   max-width: var(--maxw);
   margin-inline: auto;
-  padding: clamp(3.5rem, 10vw, 7rem) var(--pad) clamp(3rem, 7vw, 5rem);
+  padding: clamp(4rem, 11vw, 7.5rem) var(--pad) clamp(2.5rem, 5vw, 3.5rem);
   display: grid;
-  align-items: center;
-  min-height: min(62svh, 520px);
-  align-content: center;
+  justify-items: center;
+  align-content: start;
   isolation: isolate;
 }
 
-/* The entry, recessed behind the claim: faded enough to read as backdrop,
-   not so faded you cannot read it. Below 1040px there is no column to hide in,
-   so it rejoins the flow at full strength rather than disappearing. */
-.entry.hero-entry {
-  position: absolute;
-  right: var(--pad);
-  top: 50%;
-  width: min(27rem, 40%);
-  transform: translateY(-50%);
-  opacity: 0.55;
-  z-index: -1;
-  pointer-events: none;
-  box-shadow: none;
-  filter: saturate(0.6);
+.hero-inner {
+  max-width: 46rem;
+  text-align: center;
 }
 
-/* Hidden outright on phones: it is context, not the message, and the Inat
-   section explains the word in prose anyway. */
-@media (max-width: 899px) {
+/* The entry as a print on the background: below the buttons, pushed to the
+   right, no shadow and no fill so the dot grid shows through it. It is in the
+   flow rather than absolutely positioned so it can never climb up beside the
+   call to action, whatever the viewport does. `z-index: -1` inside the hero's
+   own stacking context keeps it behind the text without falling behind the
+   page. */
+.entry.hero-entry {
+  position: relative;
+  z-index: -1;
+  justify-self: end;
+  width: min(26rem, 46%);
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  margin-right: calc(-1 * clamp(0px, 2vw, 1.5rem));
+  font-size: 0.92rem;
+  background: transparent;
+  box-shadow: none;
+  opacity: 0.42;
+  filter: saturate(0.55);
+  pointer-events: none;
+  user-select: none;
+}
+.hero-entry .entry-word { font-size: clamp(2rem, 5vw, 2.7rem); }
+
+/* Not on phones: the thesis line carries the meaning there, and the full entry
+   has its own page. */
+@media (max-width: 719px) {
   .entry.hero-entry { display: none; }
 }
 
-@media (min-width: 900px) and (max-width: 1040px) {
-  .entry.hero-entry {
-    position: static;
-    width: 100%;
-    max-width: 34rem;
-    transform: none;
-    opacity: 1;
-    z-index: auto;
-    pointer-events: auto;
-    box-shadow: var(--shadow);
-    filter: none;
-    margin-top: clamp(2rem, 6vw, 3rem);
-  }
-}
-
-.hero-inner { max-width: 46rem; }
-
-/* Above the breakpoint the entry is an absolutely positioned backdrop on the
-   right, so the text column has to be told to stop before it — otherwise long
-   rotation phrases run straight across the card. */
-@media (min-width: 1041px) {
-  .hero-inner { max-width: min(46rem, calc(100% - 31rem)); }
+/* /inat/ borrows the hero for the switch. The title is a statement, not the
+   pitch, so it runs one size down from the landing claim. */
+.hero-title {
+  font-size: clamp(1.9rem, 4.6vw, 3.1rem);
+  max-width: 22ch;
+  margin: 0 auto 0.9rem;
 }
 
 .kicker {
@@ -477,23 +474,36 @@ section[id] { scroll-margin-top: 6rem; }
   margin-bottom: 1.1rem;
 }
 
-/* Lead and rotation are separate rows, so the gold line always starts at the
-   same x no matter how long the word before it is. Three rows are reserved
-   (one lead + up to two wrapped rotation lines) so a long phrase cycling in
-   cannot shove the rest of the page down. */
-.hero-lead-word,
-.hero-claim .rotator { display: block; }
+/* Lead and rotation are separate rows. The rotation row is a one-cell grid
+   holding two copies of the phrase: an invisible sizer with the whole of it,
+   and the live text typing over it. The cell takes the sizer's width and the
+   row centres the cell, so each letter lands exactly where it will sit in the
+   finished phrase — centred text that types left to right without the whole
+   line shuffling half a character on every keystroke. */
 .hero-claim .rotator {
+  --caret-w: 0.06em;
+  --caret-gap: 2px;
+  display: grid;
+  grid-template-columns: minmax(0, max-content);
+  justify-content: center;
+  text-align: left;
   color: var(--gold);
   /* One line is enough for every phrase in the rotation — the widest, "for the
      long term", measures 467px against 544px available. Reserving two, as the
      longer phrases once needed, left a permanent empty row under the claim. */
   min-height: 1.14em;
 }
-
-/* The line that changes. Reserving min-height stops the page jumping as
-   phrases of different lengths cycle through. */
-.rotator-text { white-space: pre-wrap; }
+.rotator-sizer,
+.rotator-live { grid-area: 1 / 1; white-space: pre-wrap; }
+.rotator-sizer { visibility: hidden; }
+/* The live copy ends in a caret, so the sizer has to end in one too. Without
+   this the cell grows by a caret on the last keystroke and the whole line
+   steps left by half of it — the very shuffle this arrangement exists to stop. */
+.rotator-sizer::after {
+  content: '';
+  display: inline-block;
+  width: calc(var(--caret-w) + var(--caret-gap));
+}
 
 .hero-lead-word {
   display: inline-block;
@@ -503,9 +513,9 @@ section[id] { scroll-margin-top: 6rem; }
 
 .caret {
   display: inline-block;
-  width: 0.06em;
+  width: var(--caret-w);
   height: 0.82em;
-  margin-left: 2px;
+  margin-left: var(--caret-gap);
   vertical-align: -0.14em;
   background: var(--gold);
   animation: blink 1.05s steps(1) infinite;
@@ -516,10 +526,11 @@ section[id] { scroll-margin-top: 6rem; }
   font-size: clamp(1rem, 1.6vw, 1.15rem);
   color: var(--ink-dim);
   max-width: 34rem;
+  margin-inline: auto;
   margin-bottom: 1.6rem;
 }
 
-.hero-cta { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.hero-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; }
 
 .sr-only {
   position: absolute;
@@ -531,7 +542,7 @@ section[id] { scroll-margin-top: 6rem; }
   border: 0;
 }
 
-/* ── The dictionary entry, now inside the Inat section ───────────────── */
+/* ── The dictionary entry: a print on the landing, the real thing on /inat/ ── */
 
 .entry {
   position: relative;
@@ -683,51 +694,43 @@ section[id] { scroll-margin-top: 6rem; }
   color: var(--ink-dim);
 }
 
-/* ── Dark inat section ───────────────────────────────────────────────── */
+/* ── /inat/: the word's own page ─────────────────────────────────────── */
 
 .section-dark {
   max-width: none;
   background: var(--bg-3);
   border-block: 2px solid var(--line);
 }
-.section-dark > .inat-grid {
+
+/* The entry on the left, the story on the right; one column on phones with the
+   definition first, because that is the thing people came to read. */
+.inat-grid {
   max-width: var(--maxw);
   margin-inline: auto;
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   gap: clamp(1.5rem, 5vw, 4rem);
   align-items: start;
 }
-@media (max-width: 900px) { .section-dark > .inat-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .inat-grid { grid-template-columns: 1fr; } }
 
-.badge-invert { background: var(--bg); }
-
-.section-tight { padding-block: clamp(2.5rem, 6vw, 4rem); }
-.inat-narrow { max-width: var(--maxw); margin-inline: auto; }
-.inat-narrow .section-title { font-size: clamp(1.6rem, 3.4vw, 2.4rem); max-width: 24ch; }
-
-/* Kept, but demoted: this is the story behind the name, not the pitch. */
+/* On its own page the story is meant to be read, so it runs at full size. */
 .inat-note {
-  max-width: 46rem;
-  margin: 1rem 0 1.5rem;
   display: grid;
-  gap: 0.7rem;
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: var(--ink-dim);
+  gap: 1rem;
+  font-size: 1.02rem;
+  line-height: 1.7;
 }
 .inat-day {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--ink-dim);
-  opacity: 0.7;
+  margin-top: 0.5rem;
 }
 
-.principles-row {
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  margin-bottom: 1.5rem;
-}
-.principles-row li { font-size: 0.9rem; padding: 0.7rem 0.9rem; }
+/* The way back to the pitch. */
+.inat-next-inner { max-width: 40rem; margin-inline: auto; text-align: center; }
+.inat-next-inner .section-title { margin-bottom: 1.4rem; }
 
 .principles { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
 .principles li {
@@ -742,8 +745,24 @@ section[id] { scroll-margin-top: 6rem; }
 }
 .principles li::before { content: '→'; color: var(--gold); margin-right: 0.6rem; }
 
+/* After .principles on purpose: same specificity, and this one has to win on
+   margin, or the row loses its top gap and its centring. */
+.principles-row {
+  max-width: var(--maxw);
+  margin: clamp(2rem, 5vw, 3rem) auto 0;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+.principles-row li { font-size: 0.9rem; padding: 0.7rem 0.9rem; }
+
 .switch-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.8rem; }
+
+/* Sized from three numbers so the same markup can be a footnote or a headline.
+   The knob's travel falls out of the track: it moves by the difference between
+   the track's width and its height. */
 .switch {
+  --sw-w: 56px;
+  --sw-h: 32px;
+  --sw-pad: 3px;
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
@@ -756,27 +775,31 @@ section[id] { scroll-margin-top: 6rem; }
   font-weight: 700;
 }
 .switch-track {
-  width: 56px;
-  height: 32px;
+  width: var(--sw-w);
+  height: var(--sw-h);
   border: 2px solid var(--line);
   border-radius: 999px;
   background: var(--bg-2);
   display: inline-block;
   position: relative;
+  flex: none;
   transition: background 0.2s var(--ease);
 }
 .switch-knob {
   position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 22px;
-  height: 22px;
+  top: var(--sw-pad);
+  left: var(--sw-pad);
+  width: calc(var(--sw-h) - 4px - 2 * var(--sw-pad));
+  height: calc(var(--sw-h) - 4px - 2 * var(--sw-pad));
   border-radius: 50%;
   background: var(--ink-dim);
   transition: transform 0.22s var(--ease), background 0.2s var(--ease);
 }
 .switch.is-on .switch-track { background: var(--gold); }
-.switch.is-on .switch-knob { transform: translateX(24px); background: #0a1024; }
+.switch.is-on .switch-knob {
+  transform: translateX(calc(var(--sw-w) - var(--sw-h)));
+  background: #0a1024;
+}
 .switch.refuse { animation: refuse 0.4s var(--ease); }
 @keyframes refuse {
   0%, 100% { transform: translateX(0); }
@@ -784,6 +807,33 @@ section[id] { scroll-margin-top: 6rem; }
   75% { transform: translateX(6px); }
 }
 .switch-say { font-family: var(--font-mono); font-size: 0.85rem; color: var(--gold); min-height: 1.2em; }
+
+/* The headline version on /inat/: the switch is the first thing on the page,
+   so it gets headline proportions and a shake to match. */
+.switch-row-hero {
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0.4rem 0 1.6rem;
+}
+.switch-xl {
+  --sw-w: 124px;
+  --sw-h: 68px;
+  --sw-pad: 5px;
+  gap: 1.1rem;
+  font-size: clamp(1.5rem, 4vw, 2.4rem);
+  letter-spacing: -0.03em;
+}
+.switch-xl.refuse { animation: refuse-xl 0.4s var(--ease); }
+@keyframes refuse-xl {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-12px); }
+  75% { transform: translateX(12px); }
+}
+.switch-row-hero .switch-say { font-size: 1.05rem; min-height: 1.4em; }
+@media (max-width: 480px) {
+  .switch-xl { --sw-w: 96px; --sw-h: 54px; --sw-pad: 4px; gap: 0.8rem; }
+}
 
 /* ── Contact ─────────────────────────────────────────────────────────── */
 
@@ -797,18 +847,6 @@ section[id] { scroll-margin-top: 6rem; }
   .contact-grid > div:first-child { position: sticky; top: 6.5rem; }
 }
 @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
-
-.mail-direct {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-top: 1.5rem;
-  padding: 0.9rem 1.1rem;
-  border: 2px dashed var(--line);
-  border-radius: var(--r-sm);
-  background: var(--bg-2);
-}
 
 .form {
   padding: clamp(1.25rem, 3vw, 1.9rem);
@@ -911,4 +949,6 @@ body.inat-mode .card::before { background: var(--gold); }
   }
   html.js .reveal { opacity: 1; transform: none; }
   .caret { animation: none; }
+  /* The script hides the caret here, so the sizer drops its stand-in too. */
+  .rotator-sizer::after { display: none; }
 }
