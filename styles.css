@@ -694,6 +694,24 @@ section[id] { scroll-margin-top: 6rem; }
   .hero-path .entry-word { font-size: clamp(2rem, 5vw, 2.7rem); }
   .hero-path .curl { --row: 3.4rem; }
 }
+
+/* On paper the fade alone goes muddy: near-black borders turn pencil-grey and
+   the gold title turns beige. So where the two prints float in the light theme
+   they keep more of their opacity and swap to paler ink instead — the look of
+   a letterpress print rather than a photocopy. Scoped to the floating layout so
+   the in-flow card on narrow screens keeps its full-strength colours. */
+@media (min-width: 1100px) {
+  :root[data-theme='light'] .entry.hero-entry,
+  :root[data-theme='light'] .entry.hero-path {
+    --line: #d6d0c2;
+    --line-strong: #c9c2b2;
+    --ink: #4b5470;
+    --ink-dim: #8b92a8;
+    --wordmark-end: #7d9be8;
+    opacity: 0.8;
+    filter: none;
+  }
+}
 .hero-path .entry-meta { margin-top: 0.1rem; }
 .hero-path .entry-rule { margin: 0.8rem 0 0.4rem; }
 
