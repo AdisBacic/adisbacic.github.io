@@ -104,6 +104,7 @@
       <!-- ── Hero ───────────────────────────────────────────────────── -->
       <section class="hero">
         <div class="hero-inner reveal">
+          <p class="kicker kicker-role" data-i18n="hero.role">Software developers</p>
           <p class="kicker" data-i18n="hero.kicker">Stockholm</p>
 
           <h1 class="hero-claim">
@@ -124,20 +125,16 @@
             </span>
           </h1>
 
-          <p class="hero-thesis" data-i18n="hero.thesis">
-            Inat means the stubbornness that refuses "close enough". It is why we ship
-            what works and keep it working.
-          </p>
-
           <div class="hero-cta">
             <a class="btn btn-primary" href="#contact" data-i18n="hero.ctaPrimary">Start a conversation</a>
             <a class="btn btn-ghost" href="#services" data-i18n="hero.ctaSecondary">What we do</a>
           </div>
         </div>
 
-        <!-- The entry as a print on the background: below the call to action
-             and off to the right, faded. Decorative here — the readable version,
-             with the pronunciation button, lives on /inat/. -->
+        <!-- The entry as a print on the background: behind the claim, off to
+             the right, faded, and out of the flow so it takes no room of its
+             own. Decorative here — the readable version, with the pronunciation
+             button, lives on /inat/. -->
         <article class="entry hero-entry" aria-hidden="true">
           <div class="entry-top">
             <p class="entry-word">inat</p>
@@ -169,37 +166,53 @@
           </p>
         </header>
 
-        <div class="cards">
-          <article class="card card-gold reveal">
-            <span class="card-num" aria-hidden="true">01</span>
-            <h3 data-i18n="svc.c1.title">Product builds</h3>
-            <p data-i18n="svc.c1.body">
-              From an idea to something in production. Web apps and installable PWAs
-              that stay usable offline, speak more than one language, and do not fall
-              over the first time the network does.
+        <!-- How the work goes, in order: five steps on one dashed line. -->
+        <ol class="path">
+          <li class="path-step reveal">
+            <span class="path-node" aria-hidden="true">01</span>
+            <h3 data-i18n="path.s1.title">We connect</h3>
+            <p data-i18n="path.s1.body">
+              To your systems and the people who use them. What exists, what hurts,
+              what must keep working.
             </p>
-          </article>
+          </li>
 
-          <article class="card card-teal reveal">
-            <span class="card-num" aria-hidden="true">02</span>
-            <h3 data-i18n="svc.c2.title">AI. More than a buzzword.</h3>
-            <p data-i18n="svc.c2.body">
-              Behind the buzzword is technology that moves what can be automated. We take
-              you from "we ought to do something with AI" to assistants wired into your
-              systems — built for the working day, not the demo.
+          <li class="path-step reveal">
+            <span class="path-node" aria-hidden="true">02</span>
+            <h3 data-i18n="path.s2.title">We plan</h3>
+            <p data-i18n="path.s2.body">
+              One scope, written down and agreed, so everyone can point at what is
+              being built.
             </p>
-          </article>
+          </li>
 
-          <article class="card card-blue reveal">
-            <span class="card-num" aria-hidden="true">03</span>
-            <h3 data-i18n="svc.c3.title">Workflows &amp; automation</h3>
-            <p data-i18n="svc.c3.body">
-              Dare to dream. With the technology available today there are far fewer
-              limits than we are used to. We help you rethink how the work could
-              actually be done — and build the systems that make it possible.
+          <li class="path-step reveal">
+            <span class="path-node" aria-hidden="true">03</span>
+            <h3 data-i18n="path.s3.title">We visualize</h3>
+            <p data-i18n="path.s3.body">
+              Sketches and clickable prototypes before production code. Decisions get
+              made on something you can see.
             </p>
-          </article>
-        </div>
+          </li>
+
+          <li class="path-step reveal">
+            <span class="path-node" aria-hidden="true">04</span>
+            <h3 data-i18n="path.s4.title">We build</h3>
+            <p data-i18n="path.s4.body">
+              In production early and in small pieces, with offline and failure
+              handled from the first version.
+            </p>
+          </li>
+
+          <li class="path-step reveal">
+            <span class="path-node" aria-hidden="true">05</span>
+            <h3 data-i18n="path.s5.title">We keep it running</h3>
+            <p data-i18n="path.s5.body">
+              Shipped is the start. Monitored, patched and improved for years, not
+              weeks.
+            </p>
+          </li>
+        </ol>
       </section>
 
       <!-- ── Work: proof, not a résumé ───────────────────────────────── -->

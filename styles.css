@@ -404,16 +404,17 @@ section[id] { scroll-margin-top: 6rem; }
 /* ── Hero ────────────────────────────────────────────────────────────── */
 
 /* One centred column. The claim and the call to action are the whole point of
-   the first screen, so nothing sits beside them any more — the dictionary
-   entry follows underneath as a faded print, not as a neighbour. */
+   the first screen; the dictionary entry sits behind them on the right as part
+   of the background and takes no room of its own. */
 .hero {
   position: relative;
   max-width: var(--maxw);
   margin-inline: auto;
-  padding: clamp(4rem, 11vw, 7.5rem) var(--pad) clamp(2.5rem, 5vw, 3.5rem);
+  padding: clamp(4rem, 11vw, 7.5rem) var(--pad) clamp(3rem, 7vw, 5rem);
+  min-height: min(72svh, 640px);
   display: grid;
   justify-items: center;
-  align-content: start;
+  align-content: center;
   isolation: isolate;
 }
 
@@ -422,32 +423,31 @@ section[id] { scroll-margin-top: 6rem; }
   text-align: center;
 }
 
-/* The entry as a print on the background: below the buttons, pushed to the
-   right, no shadow and no fill so the dot grid shows through it. It is in the
-   flow rather than absolutely positioned so it can never climb up beside the
-   call to action, whatever the viewport does. `z-index: -1` inside the hero's
-   own stacking context keeps it behind the text without falling behind the
-   page. */
+/* The entry as a print on the background: absolutely positioned on the right
+   and behind the text, so the section below starts where the claim ends, not
+   where the print does. No fill and no shadow, so the dot grid shows through.
+   `z-index: -1` inside the hero's own stacking context keeps it behind the
+   text without falling behind the page. */
 .entry.hero-entry {
-  position: relative;
+  position: absolute;
   z-index: -1;
-  justify-self: end;
-  width: min(26rem, 46%);
-  margin-top: clamp(2rem, 5vw, 3.5rem);
-  margin-right: calc(-1 * clamp(0px, 2vw, 1.5rem));
-  font-size: 0.92rem;
+  right: 0;
+  top: 50%;
+  transform: translateY(-46%);
+  width: min(22rem, 34%);
+  font-size: 0.9rem;
   background: transparent;
   box-shadow: none;
-  opacity: 0.42;
-  filter: saturate(0.55);
+  opacity: 0.3;
+  filter: saturate(0.5);
   pointer-events: none;
   user-select: none;
 }
-.hero-entry .entry-word { font-size: clamp(2rem, 5vw, 2.7rem); }
+.hero-entry .entry-word { font-size: clamp(1.8rem, 4vw, 2.4rem); }
 
-/* Not on phones: the thesis line carries the meaning there, and the full entry
-   has its own page. */
-@media (max-width: 719px) {
+/* Only where there is room beside the claim. Narrower than this it would sit
+   under the text itself, and the full entry has its own page anyway. */
+@media (max-width: 1039px) {
   .entry.hero-entry { display: none; }
 }
 
@@ -467,11 +467,13 @@ section[id] { scroll-margin-top: 6rem; }
   color: var(--gold);
   margin-bottom: 0.6rem;
 }
+/* What we are, above where we are. */
+.kicker-role { color: var(--ink); margin-bottom: 0.3rem; }
 
 .hero-claim {
   font-size: clamp(2.1rem, 5.6vw, 4rem);
   line-height: 1.04;
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.8rem;
 }
 
 /* Lead and rotation are separate rows. The rotation row is a one-cell grid
@@ -639,23 +641,66 @@ section[id] { scroll-margin-top: 6rem; }
 .card h3 { font-size: 1.3rem; margin: 0.9rem 0 0.6rem; }
 .card p { color: var(--ink-dim); font-size: 0.97rem; }
 
-/* Services stay on mobile — they are the offer — but compact enough not to
-   turn the page into three screens of prose. */
-@media (max-width: 720px) {
-  #services .cards { gap: 0.75rem; }
-  #services .card { padding: 1.1rem 1.15rem; }
-  #services .card h3 { font-size: 1.08rem; margin: 0.5rem 0 0.4rem; }
-  #services .card p { font-size: 0.9rem; line-height: 1.55; }
-  #services .card::before { height: 4px; }
-  #services .section-head { margin-bottom: 1.25rem; }
-}
+/* ── The path: how the work goes, in order ───────────────────────────── */
 
-.card-num {
+.path {
+  --node: 2.6rem;
+  --path-gap: clamp(1rem, 2.5vw, 2rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--path-gap);
+}
+.path-step { position: relative; }
+.path-node {
+  display: grid;
+  place-items: center;
+  width: var(--node);
+  height: var(--node);
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg-2);
+  box-shadow: var(--shadow-sm);
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: var(--ink-dim);
-  letter-spacing: 0.1em;
+  color: var(--gold);
+}
+/* The dashed line from one node to the next, drawn by the step on the left. */
+.path-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--node) / 2 - 1px);
+  left: var(--node);
+  right: calc(-1 * var(--path-gap));
+  border-top: 2px dashed var(--line);
+}
+.path-step h3 { font-size: 1.15rem; margin: 0.9rem 0 0.4rem; }
+.path-step p { color: var(--ink-dim); font-size: 0.93rem; line-height: 1.55; }
+
+/* Stacked on narrow screens: nodes down the left, the line runs vertically. */
+@media (max-width: 900px) {
+  .path { grid-template-columns: 1fr; gap: 0; }
+  .path-step {
+    display: grid;
+    grid-template-columns: var(--node) 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 1rem;
+    padding-bottom: 1.6rem;
+  }
+  .path-node { grid-row: 1 / span 2; }
+  .path-step h3 { margin: 0.5rem 0 0.35rem; }
+  .path-step:not(:last-child)::after {
+    top: var(--node);
+    bottom: 0;
+    left: calc(var(--node) / 2 - 1px);
+    right: auto;
+    border-top: 0;
+    border-left: 2px dashed var(--line);
+  }
+  #services .section-head { margin-bottom: 1.25rem; }
 }
 
 .card-link { text-decoration: none; display: block; }
