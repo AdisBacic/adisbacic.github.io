@@ -1049,6 +1049,39 @@ html.js .reveal.is-in {
   transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
 }
 
+/* ── Pop: the two prints on load, the work cards on arrival ──────────── */
+
+/* From-only keyframes, so the fade lands on whatever opacity the element has
+   of its own — 0.3 as a floating print, 1 as a card in the flow. `scale` is a
+   property of its own, so it leaves the prints' positioning transform alone. */
+@keyframes pop-in {
+  0%   { opacity: 0; scale: 0.86; }
+  60%  { scale: 1.03; }
+  100% { scale: 1; }
+}
+html.js .entry.hero-entry,
+html.js .entry.hero-path { animation: pop-in 0.7s var(--ease) 0.25s backwards; }
+html.js .entry.hero-path { animation-delay: 0.4s; }
+
+/* Reveal with a pop rather than a slide. Uses `scale`, not `transform`, so the
+   cards' hover lift keeps working once they are in. */
+html.js .reveal-pop { opacity: 0; scale: 0.9; }
+/* The stagger is a custom property, so the shorthand below cannot reset it,
+   and it is applied only to the two reveal properties — the hover lift on
+   transform and box-shadow stays instant. */
+html.js .reveal-pop.is-in {
+  opacity: 1;
+  scale: 1;
+  transition:
+    opacity 0.45s var(--ease) var(--pop-delay, 0s),
+    scale 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) var(--pop-delay, 0s),
+    transform 0.18s var(--ease),
+    box-shadow 0.18s var(--ease);
+}
+.cards-2 > .reveal-pop:nth-child(2) { --pop-delay: 0.08s; }
+.cards-2 > .reveal-pop:nth-child(3) { --pop-delay: 0.16s; }
+.cards-2 > .reveal-pop:nth-child(4) { --pop-delay: 0.24s; }
+
 /* ── Inat mode: the easter egg ───────────────────────────────────────── */
 
 body.inat-mode { --line: var(--gold); --line-strong: var(--gold); }
@@ -1062,6 +1095,9 @@ body.inat-mode .card::before { background: var(--gold); }
     transition-duration: 0.01ms !important;
   }
   html.js .reveal { opacity: 1; transform: none; }
+  html.js .reveal-pop { opacity: 1; scale: 1; }
+  html.js .entry.hero-entry,
+  html.js .entry.hero-path { animation: none; }
   .caret { animation: none; }
   /* The script hides the caret here, so the sizer drops its stand-in too. */
   .rotator-sizer::after { display: none; }

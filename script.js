@@ -284,7 +284,7 @@
 
   /* ── Reveal on scroll ──────────────────────────────────────────────── */
 
-  var revealables = document.querySelectorAll('.reveal');
+  var revealables = document.querySelectorAll('.reveal, .reveal-pop');
   if (!('IntersectionObserver' in window) || reduced) {
     // No observer, no motion preference — show everything immediately.
     Array.prototype.forEach.call(revealables, function (el) { el.classList.add('is-in'); });
@@ -303,7 +303,7 @@
     // Belt and braces: if anything is still hidden after load, reveal it.
     window.addEventListener('load', function () {
       setTimeout(function () {
-        Array.prototype.forEach.call(document.querySelectorAll('.reveal:not(.is-in)'), function (el) {
+        Array.prototype.forEach.call(document.querySelectorAll('.reveal:not(.is-in), .reveal-pop:not(.is-in)'), function (el) {
           var box = el.getBoundingClientRect();
           if (box.top < window.innerHeight) el.classList.add('is-in');
         });
