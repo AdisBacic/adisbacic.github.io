@@ -647,13 +647,13 @@ section[id] { scroll-margin-top: 6rem; }
 
 /* ── The path card: five steps on a winding line, in the entry's clothes ── */
 
-/* The print's twin: same width, same padding, same fade. */
+/* The print's twin: same width, same padding, same fade, same offset. */
 .entry.hero-path {
   position: absolute;
   z-index: -1;
   right: 0;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-46%);
   width: min(17rem, 26%);
   padding: clamp(1rem, 2vw, 1.4rem);
   font-size: 0.84rem;
@@ -693,7 +693,6 @@ section[id] { scroll-margin-top: 6rem; }
   }
   .hero-path .entry-word { font-size: clamp(2rem, 5vw, 2.7rem); }
   .hero-path .curl { --row: 3.4rem; }
-  .hero-path .curl-label { font-size: 1rem; }
 }
 .hero-path .entry-meta { margin-top: 0.1rem; }
 .hero-path .entry-rule { margin: 0.8rem 0 0.4rem; }
@@ -701,7 +700,7 @@ section[id] { scroll-margin-top: 6rem; }
 /* Rows of equal height; the SVG behind them is stretched to the same box, so
    its S-curves land on the node centres whatever the card's actual width. */
 .curl {
-  --row: 3rem;
+  --row: 3.6rem;
   --node: 2rem;
   position: relative;
 }
@@ -751,7 +750,7 @@ section[id] { scroll-margin-top: 6rem; }
 .curl-label {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 1em;
   letter-spacing: -0.01em;
 }
 
