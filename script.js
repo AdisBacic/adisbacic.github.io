@@ -27,7 +27,7 @@
     'hero.kicker': 'Stockholm',
     'hero.build': 'Vi bygger',
     'hero.buildAll': 'Vi bygger skalbart, säkert, långsiktigt, transparent och metodiskt. Vi skapar värde, kvalitet, förtroende och försprång.',
-    'hero.ctaPrimary': 'Starta ett samtal',
+    'hero.ctaPrimary': 'Ta kontakt',
     'hero.ctaSecondary': 'Vad vi gör',
     'entry.pos': 'substantiv',
     'entry.lang': 'bosniska',
