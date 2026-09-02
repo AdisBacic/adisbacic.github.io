@@ -132,7 +132,7 @@
         </div>
 
         <!-- The entry as a print on the background: behind the claim, off to
-             the right, faded, and out of the flow so it takes no room of its
+             the left, faded, and out of the flow so it takes no room of its
              own. Decorative here — the readable version, with the pronunciation
              button, lives on /inat/. -->
         <article class="entry hero-entry" aria-hidden="true">
@@ -154,65 +154,35 @@
             <span data-i18n="entry.usage">"He rebuilt it brick by brick, iz inata."</span>
           </p>
         </article>
-      </section>
 
-      <!-- ── Services: what is on offer ─────────────────────────────── -->
-      <section id="services" class="section">
-        <header class="section-head reveal">
-          <p class="badge" data-i18n="svc.badge">What we do</p>
-          <h2 class="section-title" data-i18n="svc.title">The philosophy</h2>
-          <p class="section-sub" data-i18n="svc.sub">
-            Scoped small enough to start next week, built as if it has to run for years.
+        <!-- What we do, in the entry's clothes: five steps on a line that winds
+             down the card. On wide screens it sits on the right as part of the
+             backdrop; on narrow ones it drops into the flow under the buttons. -->
+        <aside class="entry hero-path" id="services" aria-labelledby="path-title">
+          <h2 class="entry-word entry-word-sm" id="path-title" data-i18n="svc.title">The philosophy</h2>
+          <p class="entry-meta"><em data-i18n="svc.badge">What we do</em> · <span data-i18n="svc.steps">five steps</span></p>
+          <hr class="entry-rule" />
+          <div class="curl">
+            <!-- One S-curve per step, in a 100×500 box stretched over the five
+                 rows: node centres at x 14/86, y 50/150/250/350/450. The curves
+                 leave and enter the nodes vertically, so they cross between the
+                 rows rather than through the labels. -->
+            <svg class="curl-line" viewBox="0 0 100 500" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path d="M14 50 C14 100 86 100 86 150 S14 200 14 250 S86 300 86 350 S14 400 14 450" />
+            </svg>
+            <ol class="curl-steps">
+              <li class="curl-step"><span class="curl-node" aria-hidden="true">01</span><span class="curl-label" data-i18n="path.s1.title">We connect</span></li>
+              <li class="curl-step"><span class="curl-node" aria-hidden="true">02</span><span class="curl-label" data-i18n="path.s2.title">We plan</span></li>
+              <li class="curl-step"><span class="curl-node" aria-hidden="true">03</span><span class="curl-label" data-i18n="path.s3.title">We visualize</span></li>
+              <li class="curl-step"><span class="curl-node" aria-hidden="true">04</span><span class="curl-label" data-i18n="path.s4.title">We build</span></li>
+              <li class="curl-step"><span class="curl-node" aria-hidden="true">05</span><span class="curl-label" data-i18n="path.s5.title">We keep it running</span></li>
+            </ol>
+          </div>
+          <p class="entry-usage">
+            <span class="usage-tag" data-i18n="svc.how">in practice</span>
+            <span data-i18n="svc.sub">Scoped small enough to start next week, built as if it has to run for years.</span>
           </p>
-        </header>
-
-        <!-- How the work goes, in order: five steps on one dashed line. -->
-        <ol class="path">
-          <li class="path-step reveal">
-            <span class="path-node" aria-hidden="true">01</span>
-            <h3 data-i18n="path.s1.title">We connect</h3>
-            <p data-i18n="path.s1.body">
-              To your systems and the people who use them. What exists, what hurts,
-              what must keep working.
-            </p>
-          </li>
-
-          <li class="path-step reveal">
-            <span class="path-node" aria-hidden="true">02</span>
-            <h3 data-i18n="path.s2.title">We plan</h3>
-            <p data-i18n="path.s2.body">
-              One scope, written down and agreed, so everyone can point at what is
-              being built.
-            </p>
-          </li>
-
-          <li class="path-step reveal">
-            <span class="path-node" aria-hidden="true">03</span>
-            <h3 data-i18n="path.s3.title">We visualize</h3>
-            <p data-i18n="path.s3.body">
-              Sketches and clickable prototypes before production code. Decisions get
-              made on something you can see.
-            </p>
-          </li>
-
-          <li class="path-step reveal">
-            <span class="path-node" aria-hidden="true">04</span>
-            <h3 data-i18n="path.s4.title">We build</h3>
-            <p data-i18n="path.s4.body">
-              In production early and in small pieces, with offline and failure
-              handled from the first version.
-            </p>
-          </li>
-
-          <li class="path-step reveal">
-            <span class="path-node" aria-hidden="true">05</span>
-            <h3 data-i18n="path.s5.title">We keep it running</h3>
-            <p data-i18n="path.s5.body">
-              Shipped is the start. Monitored, patched and improved for years, not
-              weeks.
-            </p>
-          </li>
-        </ol>
+        </aside>
       </section>
 
       <!-- ── Work: proof, not a résumé ───────────────────────────────── -->

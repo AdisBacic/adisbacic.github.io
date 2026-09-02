@@ -403,9 +403,10 @@ section[id] { scroll-margin-top: 6rem; }
 
 /* ── Hero ────────────────────────────────────────────────────────────── */
 
-/* One centred column. The claim and the call to action are the whole point of
-   the first screen; the dictionary entry sits behind them on the right as part
-   of the background and takes no room of its own. */
+/* One centred column with two things on the backdrop: the dictionary entry on
+   the left and the path card on the right. Both are absolutely positioned, so
+   the claim and the call to action stay centred and the hero takes no extra
+   height from either. */
 .hero {
   position: relative;
   max-width: var(--maxw);
@@ -423,7 +424,7 @@ section[id] { scroll-margin-top: 6rem; }
   text-align: center;
 }
 
-/* The entry as a print on the background: absolutely positioned on the right
+/* The entry as a print on the background: absolutely positioned on the left
    and behind the text, so the section below starts where the claim ends, not
    where the print does. No fill and no shadow, so the dot grid shows through.
    `z-index: -1` inside the hero's own stacking context keeps it behind the
@@ -431,11 +432,12 @@ section[id] { scroll-margin-top: 6rem; }
 .entry.hero-entry {
   position: absolute;
   z-index: -1;
-  right: 0;
+  left: 0;
   top: 50%;
   transform: translateY(-46%);
-  width: min(22rem, 34%);
-  font-size: 0.9rem;
+  width: min(17rem, 26%);
+  padding: clamp(1rem, 2vw, 1.4rem);
+  font-size: 0.84rem;
   background: transparent;
   box-shadow: none;
   opacity: 0.3;
@@ -443,11 +445,12 @@ section[id] { scroll-margin-top: 6rem; }
   pointer-events: none;
   user-select: none;
 }
-.hero-entry .entry-word { font-size: clamp(1.8rem, 4vw, 2.4rem); }
+.hero-entry .entry-word { font-size: clamp(1.6rem, 3vw, 2rem); }
 
-/* Only where there is room beside the claim. Narrower than this it would sit
-   under the text itself, and the full entry has its own page anyway. */
-@media (max-width: 1039px) {
+/* Only where there is room on both sides of the claim. Narrower than this the
+   print goes — the full entry has its own page. (The path card's narrow-screen
+   rule sits with the card's own styles further down.) */
+@media (max-width: 1099px) {
   .entry.hero-entry { display: none; }
 }
 
@@ -641,20 +644,89 @@ section[id] { scroll-margin-top: 6rem; }
 .card h3 { font-size: 1.3rem; margin: 0.9rem 0 0.6rem; }
 .card p { color: var(--ink-dim); font-size: 0.97rem; }
 
-/* ── The path: how the work goes, in order ───────────────────────────── */
+/* ── The path card: five steps on a winding line, in the entry's clothes ── */
 
-.path {
-  --node: 2.6rem;
-  --path-gap: clamp(1rem, 2.5vw, 2rem);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: var(--path-gap);
+.entry.hero-path {
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(21rem, 32%);
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+  background: transparent;
+  box-shadow: none;
+  opacity: 0.55;
+  transition: opacity 0.25s var(--ease);
+  scroll-margin-top: 6rem;
 }
-.path-step { position: relative; }
-.path-node {
+/* Faded like the print until you reach for it. */
+.entry.hero-path:hover,
+.entry.hero-path:focus-within { opacity: 1; }
+
+/* The card is taller than the claim, so where it floats the hero has to be at
+   least tall enough to hold it — otherwise it pokes into the nav and the next
+   section on short viewports. */
+@media (min-width: 1100px) {
+  .hero { min-height: 40rem; }
+}
+
+/* Narrower than that, the card is the offer and drops into the flow under the
+   buttons at full strength. After the base rule on purpose: same specificity. */
+@media (max-width: 1099px) {
+  .entry.hero-path {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 34rem;
+    margin-top: clamp(2rem, 6vw, 3rem);
+    opacity: 1;
+    background: var(--bg-2);
+    box-shadow: var(--shadow);
+  }
+}
+.entry-word-sm { font-size: clamp(1.5rem, 2.4vw, 1.9rem); }
+.hero-path .entry-meta { margin-top: 0.1rem; }
+.hero-path .entry-rule { margin: 0.8rem 0 0.4rem; }
+
+/* Rows of equal height; the SVG behind them is stretched to the same box, so
+   its S-curves land on the node centres whatever the card's actual width. */
+.curl {
+  --row: 3.6rem;
+  --node: 2rem;
+  position: relative;
+}
+.curl-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  color: var(--line-strong);
+}
+.curl-line path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-dasharray: 3 4;
+  vector-effect: non-scaling-stroke;
+}
+.curl-steps { list-style: none; margin: 0; padding: 0; position: relative; }
+.curl-step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: var(--row);
+  padding-left: calc(14% - var(--node) / 2);
+}
+.curl-step:nth-child(even) {
+  flex-direction: row-reverse;
+  padding-left: 0;
+  padding-right: calc(14% - var(--node) / 2);
+  text-align: right;
+}
+.curl-node {
+  flex: none;
   display: grid;
   place-items: center;
   width: var(--node);
@@ -662,45 +734,16 @@ section[id] { scroll-margin-top: 6rem; }
   border: 2px solid var(--line);
   border-radius: 50%;
   background: var(--bg-2);
-  box-shadow: var(--shadow-sm);
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: var(--gold);
 }
-/* The dashed line from one node to the next, drawn by the step on the left. */
-.path-step:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  top: calc(var(--node) / 2 - 1px);
-  left: var(--node);
-  right: calc(-1 * var(--path-gap));
-  border-top: 2px dashed var(--line);
-}
-.path-step h3 { font-size: 1.15rem; margin: 0.9rem 0 0.4rem; }
-.path-step p { color: var(--ink-dim); font-size: 0.93rem; line-height: 1.55; }
-
-/* Stacked on narrow screens: nodes down the left, the line runs vertically. */
-@media (max-width: 900px) {
-  .path { grid-template-columns: 1fr; gap: 0; }
-  .path-step {
-    display: grid;
-    grid-template-columns: var(--node) 1fr;
-    grid-template-rows: auto auto;
-    column-gap: 1rem;
-    padding-bottom: 1.6rem;
-  }
-  .path-node { grid-row: 1 / span 2; }
-  .path-step h3 { margin: 0.5rem 0 0.35rem; }
-  .path-step:not(:last-child)::after {
-    top: var(--node);
-    bottom: 0;
-    left: calc(var(--node) / 2 - 1px);
-    right: auto;
-    border-top: 0;
-    border-left: 2px dashed var(--line);
-  }
-  #services .section-head { margin-bottom: 1.25rem; }
+.curl-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.98rem;
+  letter-spacing: -0.01em;
 }
 
 .card-link { text-decoration: none; display: block; }
