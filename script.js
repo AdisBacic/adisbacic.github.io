@@ -39,7 +39,7 @@
     'entry.usage': '"Han byggde upp det igen, sten för sten, iz inata."',
     'svc.badge': 'Vad vi gör',
     'svc.steps': 'i fem steg',
-    'path.s1.title': 'Ett kravlöst första samtal',
+    'path.s1.title': 'Första samtal',
     'path.s2.title': 'Vi planerar',
     'path.s3.title': 'Vi visualiserar',
     'path.s4.title': 'Vi bygger',
