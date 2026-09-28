@@ -799,15 +799,22 @@ section[id] { scroll-margin-top: 6rem; }
   color: var(--ink);
 }
 
-/* Each work card opens on the app's own landing page: a shot bled to the
-   card's edges that fades into the card, so the title sits on solid colour.
-   The files are cropped to 16:7 at capture, so `cover` shows all of them at
-   any width. */
+/* Each work card is the app's own desktop, whole: the card takes the shot's
+   3:2 shape so nothing is cropped, and the title and text sit on a scrim
+   along the bottom that fades in from nothing, so the page stays visible
+   through them. The accent bar keeps its place on top. */
+.card-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 3 / 2;
+  padding: 0;
+  isolation: isolate;
+}
 .card-shot {
-  display: block;
-  position: relative;
-  margin: -1.5rem -1.5rem 1.1rem;
-  aspect-ratio: 16 / 7;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   overflow: hidden;
   background: var(--bg-3);
 }
@@ -816,16 +823,45 @@ section[id] { scroll-margin-top: 6rem; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
-  transition: transform 0.6s var(--ease);
+  object-position: center top;
+  transition: transform 0.7s var(--ease);
 }
-.card-shot::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent 55%, var(--bg-2) 100%);
+.card-link:hover .card-shot img { transform: scale(1.03); }
+/* Summit is a wide dashboard shot: keep its sidebar and the stat tiles. */
+.card-shot img[src*="summit"] { object-position: left top; }
+.card-body {
+  position: relative;
+  z-index: 1;
+  padding: 1.9rem 1.5rem 1.35rem;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--bg-2) 0%, transparent) 0%,
+    color-mix(in srgb, var(--bg-2) 62%, transparent) 30%,
+    color-mix(in srgb, var(--bg-2) 86%, transparent) 100%
+  );
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 30%);
+  mask-image: linear-gradient(to bottom, transparent, #000 30%);
 }
-.card-link:hover .card-shot img { transform: scale(1.04); }
+.card-body h3 { text-shadow: 0 1px 2px color-mix(in srgb, var(--bg-2) 60%, transparent); }
+.card-body p { font-size: 0.92rem; line-height: 1.5; color: var(--ink); opacity: 0.88; }
+.card-body > :last-child { margin-bottom: 0; }
+
+/* One column: the shot sits above the text instead of under it, so neither
+   has to give way. */
+@media (max-width: 900px) {
+  .card-link { aspect-ratio: auto; }
+  .card-shot { position: relative; inset: auto; aspect-ratio: 3 / 2; }
+  .card-body {
+    padding: 1.1rem 1.5rem 1.5rem;
+    background: var(--bg-2);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
 
 /* ── /inat/: the word's own page ─────────────────────────────────────── */
 

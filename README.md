@@ -21,7 +21,7 @@ index.html      landing: markup + English copy
 inat/index.html the word's own page: the entry, the story, the stubborn switch
 styles.css      design tokens, dark/light themes
 script.js       i18n (EN/SV), theme, typewriter, form → mailto, the stubborn switch
-work/           each app's landing page, for the work cards (1280×560 WebP)
+work/           each app's desktop, the background of its work card (WebP)
 og.png          generated, see tools/
 tools/          zero-dependency PNG generator for the social card
 CNAME           inat.dev
