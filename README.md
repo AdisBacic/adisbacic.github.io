@@ -21,13 +21,15 @@ index.html      landing: markup + English copy
 inat/index.html the word's own page: the entry, the story, the stubborn switch
 styles.css      design tokens, dark/light themes
 script.js       i18n (EN/SV), theme, typewriter, form → mailto, the stubborn switch
+work/           each app's landing page, for the work cards (1280×560 WebP)
 og.png          generated, see tools/
 tools/          zero-dependency PNG generator for the social card
 CNAME           inat.dev
 ```
 
 English lives in the HTML so the page stays readable with JavaScript disabled;
-Swedish is an overlay applied by `script.js`. Nothing on the page depends on JS
+Swedish is an overlay applied by `script.js`, and the default — a first visit
+gets Swedish, and the choice is remembered. Nothing on the page depends on JS
 to be legible — the scroll reveals only hide themselves once JS has confirmed it
 is running.
 

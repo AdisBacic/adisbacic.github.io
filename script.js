@@ -14,7 +14,9 @@
 
   /* ── i18n ──────────────────────────────────────────────────────────
      English lives in the HTML, so it stays readable with JS disabled and
-     there is only one copy of it to keep correct. Swedish is the overlay. */
+     there is only one copy of it to keep correct. Swedish is the overlay,
+     and the default: the inline script in <head> sets lang="sv" unless
+     English was chosen. */
 
   var sv = {
     'skip': 'Hoppa till innehållet',
@@ -37,7 +39,7 @@
     'entry.usage': '"Han byggde upp det igen, sten för sten, iz inata."',
     'svc.badge': 'Vad vi gör',
     'svc.steps': 'i fem steg',
-    'path.s1.title': 'Vi kopplar in oss',
+    'path.s1.title': 'Ett kravlöst första samtal',
     'path.s2.title': 'Vi planerar',
     'path.s3.title': 'Vi visualiserar',
     'path.s4.title': 'Vi bygger',
@@ -63,7 +65,7 @@
     'inat.tryOff': 'Varsågod, försök stänga av den.',
     'inat.ctaWork': 'Se arbetet',
     'contact.badge': 'Kontakt',
-    'contact.title': 'Berätta vad ni vill ha byggt',
+    'contact.title': 'Ett första samtal helt förutsättningslöst för att se hur vi kan hjälpa dig',
     'contact.sub': 'Ett projekt, en råskiss eller en andra åsikt.',
     'contact.name': 'Ditt namn',
     'contact.email': 'Din mejl',

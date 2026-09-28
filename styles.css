@@ -633,6 +633,7 @@ section[id] { scroll-margin-top: 6rem; }
   content: '';
   position: absolute;
   inset: 0 0 auto 0;
+  z-index: 2; /* above the landing-page shot on the work cards */
   height: 6px;
   background: var(--line-strong);
 }
@@ -798,15 +799,33 @@ section[id] { scroll-margin-top: 6rem; }
   color: var(--ink);
 }
 
-.stack { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin: 1rem 0 0; padding: 0; }
-.stack li {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  padding: 0.2rem 0.55rem;
-  border-radius: 999px;
+/* Each work card opens on the app's own landing page: a shot bled to the
+   card's edges that fades into the card, so the title sits on solid colour.
+   The files are cropped to 16:7 at capture, so `cover` shows all of them at
+   any width. */
+.card-shot {
+  display: block;
+  position: relative;
+  margin: -1.5rem -1.5rem 1.1rem;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
   background: var(--bg-3);
-  color: var(--ink-dim);
 }
+.card-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.6s var(--ease);
+}
+.card-shot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, var(--bg-2) 100%);
+}
+.card-link:hover .card-shot img { transform: scale(1.04); }
 
 /* ── /inat/: the word's own page ─────────────────────────────────────── */
 

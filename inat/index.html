@@ -37,13 +37,17 @@
     <script>
       // Set the theme before first paint so the page never flashes the wrong one.
       (function () {
+        // Swedish unless English was chosen. Decided outside the try, so a
+        // blocked localStorage still lands on Swedish rather than the markup's
+        // English.
+        var lang = null;
         try {
           var saved = localStorage.getItem('inat.theme');
           var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
           document.documentElement.dataset.theme = saved || (prefersLight ? 'light' : 'dark');
-          var lang = localStorage.getItem('inat.lang');
-          if (lang === 'sv') document.documentElement.lang = 'sv';
+          lang = localStorage.getItem('inat.lang');
         } catch (e) {}
+        if (lang !== 'en') document.documentElement.lang = 'sv';
       })();
     </script>
 
